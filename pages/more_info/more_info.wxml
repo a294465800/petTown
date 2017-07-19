@@ -1,0 +1,42 @@
+<!--more_info.wxml-->
+<view class="container">
+
+  <!--小主帮logo、标题-->
+  <image src="https://www.sennkisystem.cn/images/main/logo.png" mode="aspectFill" class="pettown_logo"></image>
+  <view class="pettown_title">小主帮</view>
+  <!--/小主帮logo、标题-->
+
+  <!--小主帮介绍-->
+  <view class="pettown_intro">
+    <text class="pettown_intro_text">国内首家宠物垂直领域团购平台，为您找到周边最好的宠物服务。</text>
+  </view>
+  <!--/小主帮介绍-->
+
+  <!--小主帮公众号-->
+  <view class="pettown_id" bindtap="showQRcode">
+    <view class="pettown_id_text info_text">小主帮公众号</view>
+    <image src="/images/icon/back-icon.png" mode="scaleToFill" class="pettown_id_img"></image>
+  </view>
+  <!--/小主帮公众号-->
+
+  <!--小主帮其他信息-->
+  <view class="pettown_other_info info_text">小主帮—宠物主交汇群：656665010</view>
+  <view class="pettown_other_info pettown_other_info_tel">
+    <view>客服电话：020 - 31560046 </view>
+    <image src="/images/shop/call.png" mode="aspectFit" class="pettown_other_info_tel_img" bindtap="callUs" data-tel="02031560046"></image>
+  </view>
+  <view class="pettown_other_info us_qq"><text class="info_text">免费获取商户小程序联系客服
+  QQ：1033644002</text>
+  </view>
+  <!--/小主帮其他信息-->
+
+  <!--公众号二维码-->
+  <view class="QRcode_bg {{!QRcode?'hide':''}}">
+    <view class="QRcode">
+      <view class="QRcode_name info_text">小主帮公众号</view>
+      <image src="/images/mine/QRcode.png" class="QRcode_img" mode="scaleToFill" data-img="/images/mine/QRcode.png" bindtap="preQRcode"></image>
+      <icon type="clear" class="QRcode_close" size="40" bindtap="hideQRcode" />
+    </view>
+  </view>
+  <!--/公众号二维码-->
+</view>

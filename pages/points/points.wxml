@@ -1,0 +1,8 @@
+<!--points.wxml-->
+<view class="container">
+   <view class="points-title">
+    <view class="points-title-content">您的积分</view>
+    <view class="points-title-number">{{points}}</view>
+  </view> 
+  <view class="points-no">——— 积分兑换尚未开通 ———</view>
+</view>

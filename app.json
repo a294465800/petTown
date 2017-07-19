@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/cost_record/cost_record",
     "pages/mine/mine",
+    "pages/points/points",
+    "pages/more_info/more_info",
+    "pages/cost_record/cost_record",
     "pages/index/index",
     "pages/logs/logs"
   ],

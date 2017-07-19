@@ -1,0 +1,26 @@
+/* points.wxss */
+
+.points-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+}
+
+.points-title-content, .points-title-number {
+  font-size: 16px;
+}
+
+.points-title-number {
+  color: #ff963d;
+}
+
+.points-no {
+  width: 100%;
+  font-size: 30rpx;
+  text-align: center;
+  color: #999;
+  margin-top: 20rpx;
+}

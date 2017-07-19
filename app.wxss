@@ -15,10 +15,21 @@ view {
   height: 100%;
 }
 
+/* 
+  隐藏、出现
+*/
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
 /*
   评论公共样式
 */
-/*评论页公共样式*/
 
 .shop_comment_item, .shop_comment_item_love, .shop_comment_item_top,
 .shop_comment_item_top_r_bottom, .shop_comment_item_goods,
@@ -96,7 +107,7 @@ view {
 }
 
 .shop_comment_item_bottom {
-  font-size: 15px!important;
+  font-size: 15px !important;
   color: #333;
   margin-top: 16rpx;
 }
@@ -110,7 +121,7 @@ view {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  font-size: 14px!important;
+  font-size: 14px !important;
 }
 
 .shop_comment_item_love_number, .shop_comment_item_goods_name {
