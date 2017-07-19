@@ -1,0 +1,23 @@
+<!--mine.wxml-->
+<view class="container">
+  <view class="mine_head" hover-class="push_class" hover-stay-time="150" bindtap="{{userInfo == null?'Login':''}}">
+    <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/mine/login.png'}}" mode="aspectFill" class="mine_head_img"></image>
+    <view class="mine_head_info">{{userInfo.nickName?userInfo.nickName:'请登录'}}</view>
+  </view>
+   <view class="mine_item" hover-class="push_class" hover-stay-time="150" bindtap="goToCoupon">
+    <image src="/images/mine/coupon.png" mode="aspectFit" class="mine_item_img"></image>
+    <view class="mine_item_word">优惠券</view>
+  </view> 
+  <view class="mine_item" hover-class="push_class" hover-stay-time="150" bindtap="goToPoints">
+    <image src="/images/mine/points.png" mode="aspectFit" class="mine_item_img"></image>
+    <view class="mine_item_word">我的积分</view>
+  </view>
+  <view class="mine_item" hover-class="push_class" hover-stay-time="150" bindtap="goToMore">
+    <image src="/images/mine/more.png" mode="aspectFit" class="mine_item_img"></image>
+    <view class="mine_item_word">关于小主帮</view>
+  </view>
+  <button class="mine_item" hover-class="push_class" hover-stay-time="150" open-type="contact">
+    <image src="/images/mine/kefu.png" mode="aspectFit" class="mine_item_img"></image>
+    <view class="mine_item_word">在线客服</view>
+  </button>
+</view>
