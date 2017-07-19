@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/cost_record/cost_record",
     "pages/mine/mine",
     "pages/index/index",
     "pages/logs/logs"
@@ -7,7 +8,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#ff963d"
   },
   "tabBar": {
@@ -19,7 +20,7 @@
         "selectedIconPath": "/images/tab/shop_s.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/cost_record/cost_record",
         "text": "订单",
         "iconPath": "/images/tab/order.png",
         "selectedIconPath": "/images/tab/order_s.png"

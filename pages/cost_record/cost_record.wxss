@@ -1,0 +1,164 @@
+/* cost_record.wxss */
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orange {
+  color: #ff963d !important;
+}
+
+.order-none {
+  width: 100%;
+  font-size: 30rpx;
+  text-align: center;
+  color: #999;
+  padding-top: 30rpx;
+}
+
+.swiper_wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+}
+
+/*消费记录导航*/
+
+.cost_record_nav, .been_comment, .been_comment_content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cost_record_nav {
+  min-height: 80rpx;
+  width: 100%;
+  justify-content: space-around;
+  /* border-bottom: 2rpx solid #eee; */
+  position: relative;
+  background-color: #fff;
+}
+
+.cost_record_nav_item {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+}
+
+.cost_record_nav_shift {
+  height: 8rpx;
+  border-radius: 50rpx;
+  width: 33.3%;
+  background-color: #ff963d;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+/*swiper*/
+
+.swiper_part {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.scroll {
+  height: 100%;
+}
+
+/*第一页——已评价*/
+
+.been_comment {
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  border-top: 2rpx solid #eee;
+}
+
+.been_comment_img {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2rpx solid #eee;
+}
+
+.been_comment_score_img {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0 2rpx;
+}
+
+.been_comment_content {
+  flex: 1;
+}
+
+.been_comment_word {
+  margin-left: 20rpx;
+  flex: 1;
+}
+
+.been_comment_title {
+  max-width: 320rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 16px;
+}
+
+.been_comment_shop {
+  width: 100%;
+  font-size: 14px;
+  color: #999;
+  text-align: right;
+  margin-top: 10rpx;
+}
+
+.been_comment_score, .not_comment_score {
+  margin-top: 30rpx;
+}
+
+.been_comment_btn {
+  padding: 10rpx 0;
+  background-color: #eee;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 4rpx 4rpx 2rpx #ccc;
+  min-width: 140rpx;
+  text-align: center;
+  margin-left: 40rpx;
+}
+
+/*未评价*/
+
+.not_comment_score {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+
+.not_comment_btn {
+  background-color: #ff963d;
+}
+
+/*未消费*/
+
+.not_cost_id {
+  margin-top: 10rpx;
+}
+
+.not_cost_id_title, .not_cost_id_num {
+  font-size: 14pxpx;
+}
+
+.not_cost_id_num {
+  color: #ff963d;
+}
+
+.not_cost_btn {
+  background-color: #ff6464;
+}
