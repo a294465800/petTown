@@ -1,0 +1,19 @@
+<!--coupon.wxml-->
+<view class="container">
+  <block wx:if="{{coupon.length > 0}}">
+    <view class="coupon_item" wx:for="{{coupon}}" wx:key="id">
+      <view class="coupon_item_top">
+        <view class="coupon_item_top_price">￥<text class="coupon_item_top_price_num">{{item.price}}</text></view>
+        <view class="coupon_item_top_type">
+          <view class="coupon_item_top_type_name">{{item.name}}</view>
+          <view class="coupon_item_top_type_tip">{{item.tip}}</view>
+        </view>
+        <view class="coupon_item_top_circle"></view>
+      </view>
+      <view class="coupon_item_bottom">优惠券有效期：{{item.time}}</view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="coupons_bottom">——— 暂无优惠券 ———</view>
+  </block>
+</view>

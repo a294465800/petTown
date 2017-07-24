@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/mine/mine",
+    "pages/schedule/schedule",
+    "pages/coupon/coupon",
+    "pages/cost_comment/cost_comment",
     "pages/points/points",
     "pages/more_info/more_info",
     "pages/cost_record/cost_record",

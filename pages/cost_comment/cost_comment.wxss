@@ -1,0 +1,72 @@
+/* cost_comment.wxss */
+
+.container {
+  padding: 20rpx 30rpx;
+}
+
+/*评论框*/
+
+.comment_inut {
+  height: 400rpx;
+  box-sizing: border-box;
+  width: 100%;
+  border: 2rpx solid #ccc;
+  border-radius: 10rpx;
+  padding: 20rpx 30rpx;
+  font-size: 16px;
+}
+
+/*插入图片*/
+
+.comment_add_img_btn {
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 10rpx;
+  position: relative;
+  overflow: unset;
+}
+
+.comment_del_img_btn {
+  position: absolute;
+  right: -14rpx;
+  top: -14rpx;
+  z-index: 1;
+}
+
+/*评分*/
+
+.comment_star {
+  margin-top: 30rpx;
+}
+
+.comment_part, .comment_add_img {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20rpx;
+}
+
+.comment_star_word, .comment_add_img_title {
+  margin-right: 40rpx;
+  font-size: 16px;
+}
+
+.shop_comment_item_score_img {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+
+/*提交*/
+
+.comment_submit {
+  margin: 60rpx auto 0;
+  color: #fff;
+  background-color: #ff963d;
+  padding: 20rpx 0;
+  border-radius: 50rpx;
+  box-shadow: 6rpx 6rpx 4rpx #ccc;
+  text-align: center;
+  max-width: 240rpx;
+}

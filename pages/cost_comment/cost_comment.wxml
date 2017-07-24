@@ -1,0 +1,43 @@
+<!--cost_comment.wxml-->
+<view class="container">
+
+  <!--评论输入-->
+  <textarea auto-focus class="comment_inut" placeholder="请评价" maxlength="200" bindinput="getComments" />
+  <!--/评论输入-->
+
+  <!--插入图片-->
+  <view class="comment_add_img">
+    <view class="comment_add_img_title">添加图片</view>
+    <view class="comment_add_imgs">
+    <image src="{{item}}" class="comment_add_img_btn" mode="aspectFill" wx:for="{{imgs}}" data-imgs="{{imgs}}" data-img="{{item}}" bindtap="preImg">
+    <icon type="clear" size="20" class="comment_del_img_btn" catchtap="delImg" data-img="{{item}}" />
+    </image>
+      <block wx:if="{{imgs.length < 3}}">
+        <image class="comment_add_img_btn" src="/images/order/add_img.png" mode="aspectFit" bindtap="addImg"></image>
+      </block>
+    </view>
+  </view>
+  <!--/插入图片-->
+
+  <!--打分-->
+  <view class="comment_star">
+    <view class="comment_service_star comment_part">
+      <view class="comment_star_word">店铺环境</view>
+      <view class="comment_service_star_img">
+        <image src="{{index < score.environment? star_img.ok: star_img.no}}" mode="aspectFit" class="shop_comment_item_score_img" wx:for="{{star_count}}" data-index="{{index}}" data-type="environment" bindtap="getScore"></image>
+      </view>
+    </view>
+    <view class="comment_environment_star comment_part">
+      <view class="comment_star_word">服务态度</view>
+      <view class="comment_service_star_img">
+        <image src="{{index < score.service? star_img.ok: star_img.no}}" mode="aspectFit" class="shop_comment_item_score_img" wx:for="{{star_count}}" data-index="{{index}}" data-type="service" bindtap="getScore"></image>
+      </view>
+    </view>
+  </view>
+  <!--/打分-->
+
+  <!--提交-->
+  <view class="comment_submit" bindtap="commentPost">提交</view>
+  <!--/提交-->
+
+</view>

@@ -1,0 +1,27 @@
+<!--schedule.wxml-->
+<view class="container">
+  <view class="been_comment">
+    <view class="been_comment_content">
+      <image src="{{order_info.img}}" class="been_comment_img" mode="aspectFill"></image>
+      <view class="been_comment_word">
+        <view class="been_comment_title">{{order_info.product_name}}</view>
+        <view class="been_comment_shop">—{{order_info.store_name}}</view>
+        <view class="not_cost_id">
+          <view class="not_cost_id_title">预约时间：</view>
+          <view class="not_cost_id_num">{{order_info.schedule?order_info.schedule:'暂未预约'}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="shop_item_price">￥
+      <text class="shop_item_price_number">{{order_info.price}}</text>
+    </view>
+    <view class="order_time not_cost_id_title">下单时间：{{order_info.time}}</view>
+    <view class="close_order">
+      <view class="order_time not_cost_id_title">订单号：{{order_info.number}}</view>
+      <view class="been_comment_btn close_btn" catchtap="closeOrder">确认消费</view>
+    </view>
+    <picker class="schedule_picker" mode="date" start="{{(today_year-1)+'-01-01'}}" end="{{(today_year+1)+'-12-31'}}" value="{{date}}" bindchange="getDate">{{'日期： ' + date}}</picker>
+    <picker mode="time" start="00:00" end="24:00" value="{{time}}" bindchange="getTime" class="schedule_picker">{{'时间： ' + time}}</picker>
+    <view class="been_comment_btn not_cost_btn" catchtap="orderSchedule">预约</view>
+  </view>
+</view>

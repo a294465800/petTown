@@ -1,0 +1,100 @@
+/* schedule.wxss */
+
+.been_comment {
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  border-top: 2rpx solid #eee;
+}
+
+.been_comment_content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+}
+
+.been_comment_img {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2rpx solid #eee;
+}
+
+.been_comment_word {
+  margin-left: 20rpx;
+  flex: 1;
+}
+
+.been_comment_title {
+  max-width: 320rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 16px;
+}
+
+.been_comment_shop {
+  width: 100%;
+  font-size: 14px;
+  color: #999;
+  text-align: right;
+  margin-top: 10rpx;
+}
+
+.not_cost_id {
+  margin-top: 10rpx;
+}
+
+.not_cost_id_title, .not_cost_id_num {
+  font-size: 14px;
+}
+
+.not_cost_id_num {
+  color: #ff963d;
+}
+
+.been_comment_btn {
+  padding: 10rpx 0;
+  background-color: #eee;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 4rpx 4rpx 2rpx #ccc;
+  min-width: 140rpx;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.not_cost_btn {
+  background-color: #ff6464;
+  padding: 10rpx 0;
+  font-size: 18px;
+}
+
+.order_time {
+  margin: 20rpx 0;
+}
+
+.schedule_picker {
+  background-color: #eee;
+  margin: 10rpx 0;
+  padding: 20rpx;
+}
+
+.close_order {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.close_btn {
+  margin: 0;
+  background-color: #ff963d;
+}
+
+.shop_item_price {
+  margin: 24rpx 0;
+  color: #ff963d;
+}
+
+.shop_item_price_number {
+  font-size: 18px;
+}
