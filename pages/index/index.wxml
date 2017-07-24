@@ -1,10 +1,20 @@
 <!--index.wxml-->
-<view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+<view class="container" bindtouchstart="touchStart" bindtouchend="touchEnd">
+
+  <!--广告-->
+  <swiper class="ad-header" indicator-dots autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="ad-header-img" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!--/广告  -->
+
+  <!--悬浮搜索框  -->
+  <view class="index-search" animation="{{animationSearch}}" catchtap="searchInput">
+    <icon type="search" />
+    <view class="">搜索</view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+  <!--/悬浮搜索框  -->
 </view>

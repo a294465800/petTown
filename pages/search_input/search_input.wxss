@@ -1,0 +1,29 @@
+/* search_input.wxss */
+
+/*搜索框  */
+.search-input-wrap {
+  width: 100%;
+  background-color: #ff963d;
+  padding: 20rpx 0;
+}
+
+.search-input {
+  width: 90%;
+  background-color: #fff;
+  border-radius: 50rpx;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10rpx 50rpx 10rpx 30rpx;
+}
+
+.search-input icon {
+  margin-right: 10rpx;
+}
+
+.search-input input {
+  flex: 1;
+  font-size: 16px;
+}

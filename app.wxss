@@ -28,6 +28,15 @@ view {
 }
 
 /*
+  input 的placeholder样式
+*/
+
+.input_p {
+  font: normal 16px "微软雅黑";
+  color: #ccc;
+}
+
+/*
   评论公共样式
 */
 

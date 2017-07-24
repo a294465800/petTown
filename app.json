@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/search_input/search_input",
     "pages/mine/mine",
     "pages/schedule/schedule",
     "pages/coupon/coupon",
@@ -7,7 +9,6 @@
     "pages/points/points",
     "pages/more_info/more_info",
     "pages/cost_record/cost_record",
-    "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {

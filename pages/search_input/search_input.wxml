@@ -1,0 +1,9 @@
+<!--search_input.wxml-->
+<view class="container">
+  <view class="search-input-wrap">
+    <view class="search-input">
+      <icon type="search" size="18" />
+      <input placeholder-class="input_p" type="text" placeholder="搜索商家" auto-focus />
+    </view>
+  </view>
+</view>
