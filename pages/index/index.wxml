@@ -17,4 +17,54 @@
     <view class="">搜索</view>
   </view>
   <!--/悬浮搜索框  -->
+
+  <!--目录  -->
+  <view class="index-category">
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡交易</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+  </view>
+  <!--/目录  -->
+
+  <!--提示  -->
+  <view class="index-tips">———— 附近商家 ————</view>
+  <!--/提示  -->
+
+  <!--商家列表  -->
+  <view class="index-shops-list">
+    <view class="index-shops-item" hover-class="push_class" wx:for="{{shops}}" wx:key="id" wx:for-item="shop">
+      <image src="" class="index-shops-item-img" mode="aspectFill"></image>
+      <view class="index-shops-item-content">
+        <view class="index-shops-item-name">{{shop.name}}</view>
+        <view class="idnex-shops-item-score">
+          <image src="{{index < shop.score? star_img.ok: star_img.no}}" mode="aspectFit" wx:for="{{star_count}}"></image>
+        </view>
+        <view class="index-shops-item-type">
+          <view wx:for="{{shop.type}}" wx:key="*this">{{item}}</view>
+        </view>
+      </view>
+      <view class="index-shops-item-distance">
+        <icon type="info" size="16" />{{shop.distance}}
+      </view>
+    </view>
+  </view>
+  <!--/商家列表  -->
+
+  <!--底部提示  -->
+  <view class="index-tips" hidden="{{!loading_tips}}">———— 加载中 ————</view>
+  <view class="index-tips" hidden="{{loading_tips}}">———— 已加载附近全部商家 ————</view>
+  <!--/底部提示  -->
 </view>

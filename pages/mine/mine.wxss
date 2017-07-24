@@ -44,10 +44,6 @@
   font-size: 16px;
 }
 
-.push_class {
-  background-color: #e0e0e0;
-}
-
 .mine_item::after {
   border: 0;
 }
