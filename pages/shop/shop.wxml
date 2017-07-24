@@ -1,0 +1,41 @@
+<!--shop.wxml-->
+<view class="container">
+  <!--商家导航  -->
+  <view class="shop-nav">
+    <view class="shop-nav-item {{current == index ? 'active': ''}}" wx:for="{{shop_nav}}" wx:key="id" data-index="{{index}}" catchtap="shiftPage">{{item.name}}</view>
+    <view class="shop-nav-item-border" animation="{{animationNav}}"></view>
+  </view>
+  <!--/商家导航  -->
+
+  <!--商家内容  -->
+  <view class="shop-content">
+    <swiper>
+
+      <!--商品  -->
+      <swiper-item class="shop-content-item">
+        <!--左边导航  -->
+        <scroll-view class="shop-content-nav" scroll-y>
+          <view class="shop-content-nav-item {{category_id == item.id? 'active': ''}}" wx:for="{{commodity_category}}" data-id="{{item.id}}" wx:key="id" catchtap="shiftCategory">{{item.name}}</view>
+        </scroll-view>
+        <scroll-view scroll-y class="shop-content-commodities">
+          <view class="shop_item" wx:for="{{shopItem[0]}}" wx:key="id" bindtap="goToGood" hover-class="push_class" hover-stay-time="150" data-id="{{item.id}}">
+            <view class="shop_item_l">
+              <image src="{{item.img}}" class="shop_item_img" mode="aspectFill"></image>
+              <view class="shop_item_content">
+                <view class="shop_item_name">{{item.title}}</view>
+                <view class="shop_item_price">￥
+                  <text class="shop_item_price_number">{{item.price}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="shop_item_r">已售{{item.sell}}份</view>
+          </view>
+        </scroll-view>
+        <!--/左边导航  -->
+      </swiper-item>
+      <!--/商品  -->
+
+    </swiper>
+  </view>
+  <!--/商家内容  -->
+</view>

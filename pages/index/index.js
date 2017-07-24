@@ -174,5 +174,13 @@ Page({
         shops: [...that.data.shops, ...that.data.new_shops]
       })
     }, 500)
+  },
+
+  //具体店铺跳转
+  goToShop(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/shop/shop?id=' + id,
+    })
   }
 })

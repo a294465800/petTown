@@ -45,7 +45,7 @@
 
   <!--商家列表  -->
   <view class="index-shops-list">
-    <view class="index-shops-item" hover-class="push_class" wx:for="{{shops}}" wx:key="id" wx:for-item="shop">
+    <view class="index-shops-item" hover-class="push_class" wx:for="{{shops}}" wx:key="id" wx:for-item="shop" data-id="{{shop.id}}" catchtap="goToShop">
       <image src="" class="index-shops-item-img" mode="aspectFill"></image>
       <view class="index-shops-item-content">
         <view class="index-shops-item-name">{{shop.name}}</view>

@@ -1,0 +1,145 @@
+/* shop.wxss */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/*导航  */
+
+.shop-nav {
+  height: 80rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 2rpx solid #eee;
+  position: relative;
+}
+
+.shop-nav-item {
+  font-size: 16px;
+  flex: 1;
+  text-align: center;
+}
+
+.shop-nav-item.active {
+  color: #ff963d;
+}
+
+.shop-nav-item-border {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 6rpx;
+  width: 33.3%;
+}
+
+.shop-nav-item-border::after {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 50%;
+  top: 0;
+  left: 50%;
+  margin-left: -25%;
+  background-color: #ff963d;
+}
+
+/*商家内容  */
+
+/*商品  */
+
+.shop-content {
+  flex: 1;
+  position: relative;
+}
+
+.shop-content swiper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.shop-content-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.shop-content-nav {
+  height: 100%;
+  width: 26%;
+  background-color: #fff;
+  border-right: 2rpx solid #ccc;
+}
+
+.shop-content-nav-item {
+  width: 100%;
+  text-align: center;
+  padding: 20rpx;
+  border-top: 2rpx solid #eee;
+  font-size: 14px;
+}
+
+.shop-content-nav-item:first-child {
+  border-top: 0;
+}
+
+.shop-content-nav-item.active {
+  background-color: #eee;
+}
+
+.shop-content-commodities {
+  flex: 1;
+  background-color: #fff;
+}
+
+.shop_item, .shop_item_l {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shop_item {
+  padding: 10rpx;
+  border-bottom: 2rpx solid #ccc;
+}
+
+.shop_item_img {
+  width: 140rpx;
+  height: 140rpx;
+  border: 2rpx solid #ccc;
+}
+
+.shop_item_content {
+  margin-left: 20rpx;
+  align-self: flex-start;
+  padding-top: 24rpx;
+  height: 100%;
+}
+
+.shop_item_name {
+  max-width: 220rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 16px;
+}
+
+.shop_item_price {
+  margin: 24rpx 0;
+  color: #ff963d;
+}
+
+.shop_item_price_number {
+  font-size: 18px;
+}
+
+.shop_item_r {
+  align-self: flex-end;
+  color: #999;
+  font-size: 14px;
+}
