@@ -29,6 +29,7 @@ Page({
 
     //商品目录
     category_id: 1,
+    category_index: 0,
 
     //评论页面开关
     tips_flag_c: false,
@@ -234,9 +235,18 @@ Page({
   //商品目录切换
   shiftCategory(e) {
     const that = this
-    const id = e.currentTarget.dataset.id
     that.setData({
-      category_id: id
+      category_id: e.currentTarget.dataset.id,
+      category_index: e.currentTarget.dataset.index
+    })
+  },
+
+  //具体商品跳转
+  goToCommodity(e) {
+    const that = this
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/commodity/commodity?id=' + id,
     })
   },
 

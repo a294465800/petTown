@@ -15,10 +15,10 @@
       <swiper-item class="shop-content-item">
         <!--左边导航  -->
         <scroll-view class="shop-content-nav" scroll-y>
-          <view class="shop-content-nav-item {{category_id == item.id? 'active': ''}}" wx:for="{{commodity_category}}" data-id="{{item.id}}" wx:key="id" catchtap="shiftCategory">{{item.name}}</view>
+          <view class="shop-content-nav-item {{category_id == item.id? 'active': ''}}" wx:for="{{commodity_category}}" data-id="{{item.id}}" wx:key="id" catchtap="shiftCategory" data-index="{{index}}">{{item.name}}</view>
         </scroll-view>
         <scroll-view scroll-y class="shop-content-commodities">
-          <view class="shop_item" wx:for="{{shopItem[0]}}" wx:key="id" bindtap="goToGood" hover-class="push_class" hover-stay-time="150" data-id="{{item.id}}">
+          <view class="shop_item" wx:for="{{shopItem[category_index]}}" wx:key="id" catchtap="goToCommodity" hover-class="push_class" hover-stay-time="150" data-id="{{item.id}}">
             <view class="shop_item_l">
               <image src="{{item.img}}" class="shop_item_img" mode="aspectFill"></image>
               <view class="shop_item_content">
