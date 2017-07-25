@@ -9,7 +9,7 @@
 
   <!--商家内容  -->
   <view class="shop-content">
-    <swiper>
+    <swiper bindchange="nextPage" current="{{current}}">
 
       <!--商品  -->
       <swiper-item class="shop-content-item">
@@ -35,6 +35,59 @@
       </swiper-item>
       <!--/商品  -->
 
+      <!--评价  -->
+      <swiper-item>
+        <include src="../common/comments.wxml" />
+        <block wx:if="{{comments.length > 0}}">
+          <view class="index-tips" hidden="{{!tips_flag_c}}">加载中</view>
+          <view class="index-tips" hidden="{{!tips_all_c}}">——— 已加载全部评论 ———</view>
+        </block>
+      </swiper-item>
+      <!--/评价  -->
+
+      <!--商家信息  -->
+      <swiper-item>
+        <view class="shop_info_item">
+          <view class="shop_info_item_icon_intro">
+            <image src="/images/shop/company.png" mode="aspectFit" class="shop_info_item_icon"></image>
+            <view class="shop_info_item_intro">{{store.full_name}}</view>
+          </view>
+        </view>
+        <view class="shop_info_item">
+          <view class="shop_info_item_icon_intro shop_address">
+            <image src="/images/shop/address.png" mode="aspectFit" class="shop_info_item_icon"></image>
+            <view class="shop_info_item_intro shop_address">{{store.location}}</view>
+          </view>
+          <image src="/images/shop/located.png" mode="aspectFit" class="shop_info_item_icon" bindtap="openLocation"></image>
+        </view>
+        <view class="shop_info_item">
+          <view class="shop_info_item_icon_intro">
+            <image src="/images/shop/time.png" mode="aspectFit" class="shop_info_item_icon"></image>
+            <view class="shop_info_item_intro">{{store.time}}</view>
+          </view>
+        </view>
+        <view class="shop_info_item">
+          <view class="shop_info_item_icon_intro">
+            <image src="/images/shop/tel_number.png" mode="aspectFit" class="shop_info_item_icon"></image>
+          </view>
+          <view class="shop_info_item_telgroup">
+            <block wx:for="{{store.number}}" wx:key="*this">
+              <view>{{item}}</view>
+              <image src="/images/shop/call.png" mode="aspectFit" class="shop_info_item_icon" bindtap="callStore" data-tel="{{item}}"></image>
+            </block>
+          </view>
+        </view>
+        <view class="shop_info_item shop_info_item_last">
+          <view class="shop_info_item_icon_intro">
+            <image src="/images/shop/introduce.png" mode="aspectFit" class="shop_info_item_icon shop_info_item_icon_last"></image>
+            <view class="shop_info_item_intro shop_message">{{store.content}}</view>
+          </view>
+        </view>
+        <view class="shop_img_list">
+          <image src="{{item}}" wx:for="{{store.images}}" wx:key="*this" mode="aspectFill" class="shop_img" data-url="{{item}}" bindtap="preStoreImg"></image>
+        </view>
+      </swiper-item>
+      <!--/商家信息  -->
     </swiper>
   </view>
   <!--/商家内容  -->

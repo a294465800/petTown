@@ -1,0 +1,39 @@
+<!--common.wxml-->
+<block wx:if="{{comments.length > 0}}">
+  <view class="shop_comment_item" wx:for="{{comments}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
+    <view class="shop_comment_item_content">
+      <view class="shop_comment_item_top">
+        <image src="{{comment.avatarUrl}}" mode="aspectFill" class="shop_comment_item_top_l"></image>
+        <view class="shop_comment_item_top_r">
+          <view class="shop_comment_item_top_r_top">
+            <view class="shop_comment_item_username">{{comment.nickname}}</view>
+            <view class="shop_comment_item_goods">
+              <image src="/images/shop/cart.png" class="shop_comment_item_goods_cart"></image>
+              <view class="shop_comment_item_goods_name">购买了({{comment.product_name? comment.product_name:commodity.title}})</view>
+            </view>
+          </view>
+          <view class="shop_comment_item_top_r_bottom">
+            <view class="shop_comment_item_time">{{comment.createtime}}</view>
+            <view class="shop_comment_item_score">
+              <image src="{{index < comment.score? star_img.ok: star_img.no}}" mode="aspectFit" class="shop_comment_item_score_img" wx:for="{{star_count}}"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="shop_comment_item_bottom">{{comment.content}}</view>
+      <view class="shop_comment_item_imgs">
+        <image src="{{item}}" class="shop_comment_item_img" mode="aspectFill" wx:for="{{comment.img}}" wx:key="*this" catchtap="commentPreImg" data-img="{{item}}" data-index="{{comment_index}}"></image>
+      </view>
+      <view class="shop_comment_item_replay">
+        <text class="shop_comment_item_replay_text" wx:for="{{comment.replies}}">商家回复：{{item}}</text>
+      </view>
+    </view>
+    <view class="shop_comment_item_love" catchtap="commentGood" data-id="{{comment.id}}" data-index="{{comment_index}}">
+      <image src="/images/shop/like.png" class="shop_comment_item_love_img" mode="aspectFit"></image>
+      <view class="shop_comment_item_love_number">{{comment.likes}}</view>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <view class="comments_bottom">——— 暂无评论 ———</view>
+</block>

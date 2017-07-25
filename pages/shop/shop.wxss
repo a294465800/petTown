@@ -143,3 +143,77 @@
   color: #999;
   font-size: 14px;
 }
+
+/*商家信息  */
+
+.shop_info_item {
+  width: 100%;
+  border-bottom: 2rpx dashed #ccc;
+  padding: 20rpx 30rpx 20rpx 20rpx;
+}
+
+.shop_info_item_last {
+  border: none;
+}
+
+.shop_address {
+  flex: 1;
+}
+
+.shop_info_item, .shop_info_item_icon_intro, .shop_img_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shop_info_item_icon_intro {
+  justify-content: flex-start;
+}
+
+.shop_info_item_icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.shop_info_item_telgroup {
+  margin-left: 24rpx;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.shop_info_item_intro {
+  text-align: justify;
+  margin-left: 24rpx;
+  font-size: 16px;
+}
+
+.shop_info_item_telgroup_item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.shop_img_list {
+  padding: 0 20rpx 0 40rpx;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.shop_info_item_icon_last {
+  align-self: flex-start;
+}
+
+.shop_message {
+  flex: 1;
+}
+
+.shop_img {
+  width: 200rpx;
+  height: 200rpx;
+  border: 2rpx solid #ccc;
+  margin: 0 26rpx 30rpx 0;
+}

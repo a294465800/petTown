@@ -41,6 +41,17 @@ view {
 }
 
 /*
+  提示公共样式
+*/
+
+.index-tips {
+  color: #ccc;
+  text-align: center;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+/*
   评论公共样式
 */
 
@@ -100,7 +111,6 @@ view {
 .shop_comment_item_love {
   align-self: flex-start;
   min-width: 100rpx;
-  margin-left: 50rpx;
   justify-content: flex-start;
 }
 
@@ -139,6 +149,10 @@ view {
 
 .shop_comment_item_love_number, .shop_comment_item_goods_name {
   margin-left: 10rpx;
+}
+
+.shop_comment_item_love_number {
+  font-size: 13px;
 }
 
 .commodity_comment_more {

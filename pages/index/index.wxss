@@ -58,15 +58,6 @@
   text-align: center;
 }
 
-/*提示  */
-
-.index-tips {
-  color: #ccc;
-  text-align: center;
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
-}
-
 /*商家列表  */
 
 .index-shops-list {

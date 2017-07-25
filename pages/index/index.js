@@ -109,7 +109,7 @@ Page({
     ]
   },
   onLoad() {
-    let that = this
+    const that = this
 
     let arr = []
     //评论星数数量
