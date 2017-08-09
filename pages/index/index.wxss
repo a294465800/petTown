@@ -45,17 +45,16 @@
 
 /*目录  */
 
-.index-category {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-content: center;
-  padding: 20rpx 30rpx;
-  border-bottom: 2rpx solid #eee;
+.index-category-scroll {
+  width: 100%;
+  white-space: nowrap;
+  padding: 20rpx 0;
 }
 
 .index-category-item {
   text-align: center;
+  margin: 0 20rpx;
+  display: inline-block;
 }
 
 /*商家列表  */

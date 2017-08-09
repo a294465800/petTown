@@ -19,7 +19,7 @@
   <!--/悬浮搜索框  -->
 
   <!--目录  -->
-  <view class="index-category">
+  <scroll-view scroll-x class="index-category-scroll">
     <view class="index-category-item">
       <icon type="success" size="50" />
       <view>洗澡交易</view>
@@ -36,7 +36,31 @@
       <icon type="success" size="50" />
       <view>洗澡</view>
     </view>
-  </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+    <view class="index-category-item">
+      <icon type="success" size="50" />
+      <view>洗澡</view>
+    </view>
+  </scroll-view>
   <!--/目录  -->
 
   <!--提示  -->
