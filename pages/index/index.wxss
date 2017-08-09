@@ -37,6 +37,7 @@
   border-radius: 50rpx;
   padding: 0 50rpx;
   color: #a8a8a8;
+  z-index: 1;
 }
 
 .index-search icon {
