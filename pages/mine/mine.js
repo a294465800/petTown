@@ -47,7 +47,7 @@ Page({
 
   //优惠券跳转
   goToCoupon() {
-    if (app.globalData.userInfo) {
+    if (!app.globalData.userInfo) {
       app.goToTelInput()
     } else {
       wx.navigateTo({
@@ -65,7 +65,7 @@ Page({
 
   //积分跳转
   goToPoints() {
-    if (app.globalData.userInfo) {
+    if (!app.globalData.userInfo) {
       app.goToTelInput()
     } else {
       wx.navigateTo({
