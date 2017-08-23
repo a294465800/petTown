@@ -30,7 +30,9 @@ Page({
     wx.request({
       url: app.globalData.host_v2 + 'my/coupons',
       data: {
-        page
+        page,
+        token: app.globalData.token,
+        state: 1
       },
       success: res => {
         wx.hideLoading()

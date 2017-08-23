@@ -78,6 +78,7 @@ Page({
       data: {
         page,
         state,
+        token: app.globalData.token
       },
       success: res => {
         wx.hideLoading()

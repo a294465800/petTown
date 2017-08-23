@@ -123,7 +123,6 @@ Page({
           success: res => {
             wx.request({
               url: app.globalData.host_v2 + 'register',
-              header: app.globalData.header,
               method: 'POST',
               data: {
                 captcha: that.data.captcha_input,
@@ -138,7 +137,8 @@ Page({
                   wx.showToast({
                     title: '注册成功',
                     complete: ok => {
-                      app.globalData.host = res.data.data
+                      app.globalData.userInfo = res.data.data
+                      that.gobalData.token = e.data.token
                       wx.reLaunch({
                         url: '/pages/index/index',
                       })

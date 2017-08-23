@@ -17,7 +17,8 @@ App({
     //   'AppVersion': '4.0',
     //   'storeNumber': '1400344af3767f15f957ff6c4d7c3f2c'
     // },
-    shop: null
+    shop: null,
+    token: null,
   },
 
   //获取用户设置
@@ -77,6 +78,7 @@ App({
                           })
                         } else {
                           that.globalData.userInfo = e.data.data
+                          that.globalData.token = e.data.token
                           wx.showToast({
                             title: '登录成功',
                           })
@@ -191,6 +193,7 @@ App({
                         })
                         that.globalData.userInfo = null
                       } else {
+                        that.globalData.token = e.data.token
                         wx.showToast({
                           title: '登录成功',
                         })
