@@ -1,94 +1,98 @@
 <!--index.wxml-->
-<view class="container" bindtouchstart="touchStart" bindtouchend="touchEnd">
+<block wx:if="{{shops}}">
+  <view class="container" bindtouchstart="touchStart" bindtouchend="touchEnd">
 
-  <!--广告-->
-  <swiper class="ad-header" indicator-dots autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{imgUrls}}">
-      <swiper-item>
-        <image src="{{item}}" class="ad-header-img" mode="aspectFill" />
-      </swiper-item>
-    </block>
-  </swiper>
-  <!--/广告  -->
+    <!--广告-->
+    <swiper class="ad-header" indicator-dots autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="ad-header-img" mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--/广告  -->
 
-  <!--悬浮搜索框  -->
-  <view class="index-search" animation="{{animationSearch}}" catchtap="searchInput">
-    <icon type="search" />
-    <view class="">搜索</view>
-  </view>
-  <!--/悬浮搜索框  -->
+    <!--悬浮搜索框  -->
+    <view class="index-search" animation="{{animationSearch}}" catchtap="searchInput">
+      <icon type="search" />
+      <view class="">搜索</view>
+    </view>
+    <!--/悬浮搜索框  -->
 
-  <!--目录  -->
-  <scroll-view scroll-x class="index-category-scroll">
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡交易</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-    <view class="index-category-item">
-      <icon type="success" size="50" />
-      <view>洗澡</view>
-    </view>
-  </scroll-view>
-  <!--/目录  -->
+    <!--目录  -->
+    <scroll-view scroll-x class="index-category-scroll">
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡交易</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+      <view class="index-category-item">
+        <icon type="success" size="50" />
+        <view>洗澡</view>
+      </view>
+    </scroll-view>
+    <!--/目录  -->
 
-  <!--提示  -->
-  <view class="index-tips">———— 附近商家 ————</view>
-  <!--/提示  -->
+    <!--提示  -->
+    <view class="index-tips">———— 附近商家 ————</view>
+    <!--/提示  -->
 
-  <!--商家列表  -->
-  <view class="index-shops-list">
-    <view class="index-shops-item" hover-class="push_class" wx:for="{{shops}}" wx:key="id" wx:for-item="shop" data-id="{{shop.id}}" catchtap="goToShop">
-      <image src="" class="index-shops-item-img" mode="aspectFill"></image>
-      <view class="index-shops-item-content">
-        <view class="index-shops-item-name">{{shop.name}}</view>
-        <view class="idnex-shops-item-score">
-          <image src="{{index < shop.score? star_img.ok: star_img.no}}" mode="aspectFit" wx:for="{{star_count}}"></image>
+    <!--商家列表  -->
+    <view class="index-shops-list">
+      <view class="index-shops-item" hover-class="push_class" wx:for="{{shops}}" wx:key="id" wx:for-item="shop" data-id="{{shop.id}}" catchtap="goToShop">
+        <image src="{{shop.cover}}" class="index-shops-item-img" mode="aspectFill"></image>
+        <view class="index-shops-item-content">
+          <view class="index-shops-item-name">{{shop.name}}</view>
+          <view class="idnex-shops-item-score">
+            <image src="{{index < shop.score? star_img.ok: star_img.no}}" mode="aspectFit" wx:for="{{star_count}}"></image>
+          </view>
+          <view class="index-shops-item-type">
+            <view wx:for="{{shop.type}}" wx:key="*this">{{item}}</view>
+          </view>
         </view>
-        <view class="index-shops-item-type">
-          <view wx:for="{{shop.type}}" wx:key="*this">{{item}}</view>
+        <view class="index-shops-item-distance">
+          <icon type="info" size="16" />{{shop.distance}}
         </view>
       </view>
-      <view class="index-shops-item-distance">
-        <icon type="info" size="16" />{{shop.distance}}
-      </view>
     </view>
-  </view>
-  <!--/商家列表  -->
+    <!--/商家列表  -->
 
-  <!--底部提示  -->
-  <view class="index-tips" hidden="{{!loading_tips}}">———— 加载中 ————</view>
-  <view class="index-tips" hidden="{{loading_tips}}">———— 已加载附近全部商家 ————</view>
-  <!--/底部提示  -->
-</view>
+    <!--底部提示  -->
+    <view class="index-tips" hidden="{{!loading_tips}}">———— 加载中 ————</view>
+    <view class="index-tips" hidden="{{loading_tips}}">———— 已加载附近全部商家 ————</view>
+    <!--/底部提示  -->
+  </view>
+</block>
+<block wx:else>
+</block>

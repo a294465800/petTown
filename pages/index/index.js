@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-let app = getApp()
+const app = getApp()
 
 //记录触摸位置
 let startY, startX
@@ -31,58 +31,61 @@ Page({
     //加载提示控制
     loading_tips: true,
 
+    //接口数据
+    shops: null,
+
     //模拟数据
-    shops: [
-      {
-        id: 0,
-        name: '君悦宠物店',
-        score: 2,
-        type: ['医疗', '美容', '活体'],
-        distance: '2.5km',
-      },
-      {
-        id: 1,
-        name: '肥猪宠物店啊啊啊啊啊啊啊',
-        score: 1,
-        type: ['医疗', '美容', '活体'],
-        distance: '2.5km',
-      },
-      {
-        id: 2,
-        name: '宠物店',
-        score: 5,
-        type: ['洗澡', '活体'],
-        distance: '2.5km',
-      },
-      {
-        id: 3,
-        name: '一号',
-        score: 3,
-        type: ['医疗', '美容', '活体', '洗澡', '体检', '喂食'],
-        distance: '2.5km',
-      },
-      {
-        id: 4,
-        name: '三号',
-        score: 7,
-        type: ['医疗', '美容', '活体'],
-        distance: '2.5km',
-      },
-      {
-        id: 5,
-        name: '爱之旅宠物店',
-        score: 3,
-        type: ['医疗', '美容'],
-        distance: '2.5km',
-      },
-      {
-        id: 6,
-        name: '飞跃宠物店',
-        score: 4,
-        type: ['医疗', '美容', '活体'],
-        distance: '2.5km',
-      },
-    ],
+    // shops: [
+    //   {
+    //     id: 0,
+    //     name: '君悦宠物店',
+    //     score: 2,
+    //     type: ['医疗', '美容', '活体'],
+    //     distance: '2.5km',
+    //   },
+    //   {
+    //     id: 1,
+    //     name: '肥猪宠物店啊啊啊啊啊啊啊',
+    //     score: 1,
+    //     type: ['医疗', '美容', '活体'],
+    //     distance: '2.5km',
+    //   },
+    //   {
+    //     id: 2,
+    //     name: '宠物店',
+    //     score: 5,
+    //     type: ['洗澡', '活体'],
+    //     distance: '2.5km',
+    //   },
+    //   {
+    //     id: 3,
+    //     name: '一号',
+    //     score: 3,
+    //     type: ['医疗', '美容', '活体', '洗澡', '体检', '喂食'],
+    //     distance: '2.5km',
+    //   },
+    //   {
+    //     id: 4,
+    //     name: '三号',
+    //     score: 7,
+    //     type: ['医疗', '美容', '活体'],
+    //     distance: '2.5km',
+    //   },
+    //   {
+    //     id: 5,
+    //     name: '爱之旅宠物店',
+    //     score: 3,
+    //     type: ['医疗', '美容'],
+    //     distance: '2.5km',
+    //   },
+    //   {
+    //     id: 6,
+    //     name: '飞跃宠物店',
+    //     score: 4,
+    //     type: ['医疗', '美容', '活体'],
+    //     distance: '2.5km',
+    //   },
+    // ],
 
     new_shops: [
       {
@@ -114,8 +117,36 @@ Page({
     let arr = []
     //评论星数数量
     arr.length = 5
-    that.setData({
-      star_count: arr
+    app.nowLogin() 
+    that.firstRequest(res => {
+      that.setData({
+        star_count: arr,
+        shops: res
+      })
+    })
+  },
+
+  firstRequest(cb) {
+    const that = this
+    wx.getLocation({
+      success: location => {
+        wx.request({
+          url: app.globalData.host + 'stores',
+          data: {
+            location: location.latitude + ',' + location.longitude
+          },
+          success: res => {
+            if (200 == res.data.code) {
+              typeof cb == "function" && cb(res.data.data)
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: res.data.msg,
+              })
+            }
+          }
+        })
+      },
     })
   },
 

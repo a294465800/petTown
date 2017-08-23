@@ -1,0 +1,45 @@
+/* tel_input.wxss */
+.container {
+  background-color: #eee;
+}
+
+.form {
+  background-color: #fff;
+  padding: 0 30px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 60rpx;
+}
+
+.form_part {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 80rpx;
+}
+
+.form_part:first-child{
+  border-bottom: 1px solid #ccc;
+}
+
+.form_title {
+  font-size: 14px;
+  min-width: 150rpx;
+}
+
+.form_part input {
+  flex: 1;
+}
+
+.form_part button {
+  font-size: 14px;
+}
+
+.tel_input {
+  font: normal 14px "Microsoft YaHei";
+}
+
+.captcha_btn {
+  min-width: 200rpx;
+}

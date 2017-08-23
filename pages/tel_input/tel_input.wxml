@@ -1,0 +1,17 @@
+<!--tel_input.wxml-->
+<view class="container">
+  <view class="form">
+    <form>
+      <view class="form_part">
+        <view class="form_title">手机号码</view>
+        <input placeholder="填写手机号" placeholder-class="tel_input" name="number" type="number" bindinput="checkTel" />
+        <button disabled="{{captcha}}" type="{{captcha?'default':'primary'}}" bindtap="{{!captcha?'getCaptcha':''}}" class="captcha_btn">{{captchaText}}</button>
+      </view>
+      <view class="form_part">
+        <view class="form_title">验证码</view>
+        <input placeholder="输入验证码" placeholder-class="tel_input" name="captcha" type="number" bindinput="captchaInput" />
+      </view>
+    </form>
+  </view>
+  <button form-type="submit" type="primary" disabled="{{submit}}" bindtap="register">提交</button>
+</view>

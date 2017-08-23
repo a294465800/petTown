@@ -12,12 +12,14 @@ App({
 
   globalData: {
     userInfo: null,
-    host: 'https://www.sennkisystem.cn/api/',
-    header: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'AppVersion': '4.0',
-      'storeNumber': '1400344af3767f15f957ff6c4d7c3f2c'
-    },
+    host: 'http://119.23.202.220/api/',
+    host_v2: 'http://119.23.202.220/api/v2/',
+    // host: 'https://www.sennkisystem.cn/api/v2/',
+    // header: {
+    //   'content-type': 'application/x-www-form-urlencoded',
+    //   'AppVersion': '4.0',
+    //   'storeNumber': '1400344af3767f15f957ff6c4d7c3f2c'
+    // },
     shop: null
   },
 
@@ -48,16 +50,13 @@ App({
             success: rs => {
               wx.getUserInfo({
                 success: res => {
-                  that.globalData.userInfo = res.userInfo
                   wx.request({
-                    url: that.globalData.host + 'login',
+                    url: that.globalData.host_v2 + 'login',
                     method: 'POST',
                     data: {
                       code: rs.code,
                       encryptedData: res.encryptedData,
                       iv: res.iv,
-                      app_id: that.globalData.app_id,
-                      _token: that.globalData._token
                     },
                     success: e => {
                       wx.hideLoading()
@@ -67,9 +66,24 @@ App({
                         })
                         that.globalData.userInfo = null
                       } else {
-                        wx.showToast({
-                          title: '登录成功',
-                        })
+                        if (!e.data.data.register) {
+                          wx.showModal({
+                            title: '提示',
+                            content: '你还没有绑定手机号，去绑定手机号？',
+                            success: confirm => {
+                              if(confirm.confirm){
+                                wx.navigateTo({
+                                  url: '/pages/tel_input/tel_input',
+                                })
+                              }
+                            }
+                          })
+                        } else {
+                          that.globalData.userInfo = e.data.data
+                          wx.showToast({
+                            title: '登录成功',
+                          })
+                        }
                       }
                       typeof cb == "function" && cb(that.globalData.userInfo)
                     }
@@ -112,6 +126,42 @@ App({
     })
   },
 
+  //注册
+  // register(){
+  //   const that = this
+  //   wx.request({
+  //     url: that.globalData.host_v2 + '/sms',
+  //     data: {
+  //       number: 18142883149
+  //     },
+  //     success: response => {
+  //       if(200 == res.data.code)
+  //     }
+  //   })
+  //   wx.login({
+  //     withCredentials: true,
+  //     success: rs => {
+  //       wx.getUserInfo({
+  //         success: res => {
+  //           that.globalData.userInfo = res.userInfo
+  //           wx.request({
+  //             url: that.globalData.host + 'register',
+  //             method: 'POST',
+  //             data: {
+  //               code: rs.code,
+  //               encryptedData: res.encryptedData,
+  //               iv: res.iv,
+  //             },
+  //             success: res => {
+  //               // that.globalData
+  //             }
+  //           })
+  //         }
+  //       })
+  //     }
+  //   })
+  // },
+
   //如果已授权，直接登录，否则，不做操作
   nowLogin(cb) {
     const that = this
@@ -129,14 +179,12 @@ App({
                 success: res => {
                   that.globalData.userInfo = res.userInfo
                   wx.request({
-                    url: that.globalData.host + 'login',
+                    url: that.globalData.host_v2 + 'login',
                     method: 'POST',
                     data: {
                       code: rs.code,
                       encryptedData: res.encryptedData,
                       iv: res.iv,
-                      app_id: that.globalData.app_id,
-                      _token: that.globalData._token
                     },
                     success: e => {
                       wx.hideLoading()

@@ -11,6 +11,7 @@
     "pages/points/points",
     "pages/more_info/more_info",
     "pages/cost_record/cost_record",
+    "pages/tel_input/tel_input",
     "pages/logs/logs"
   ],
   "window": {
