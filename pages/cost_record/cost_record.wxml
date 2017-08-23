@@ -1,94 +1,101 @@
 <!--cost_record.wxml-->
 <view class="container">
-  <!--消费记录导航-->
-  <view class="cost_record_nav">
-    <view class="cost_record_nav_item {{index == current?'orange':''}}" wx:for="{{cost_records}}" wx:key="id" data-index="{{index}}" bindtap="shiftPage">{{item.name}}</view>
-    <view class="cost_record_nav_shift" animation="{{animationNav}}"></view>
-  </view>
-  <!--/消费记录导航-->
 
-  <view class="swiper_wrap">
-    <swiper current="{{current}}" class="swiper_part" bindchange="nextPage">
+  <block wx:if="{{userInfo}}">
+    <!--消费记录导航-->
+    <view class="cost_record_nav">
+      <view class="cost_record_nav_item {{index == current?'orange':''}}" wx:for="{{cost_records}}" wx:key="id" data-index="{{index}}" data-id="{{item.id}}" bindtap="shiftPage">{{item.name}}</view>
+      <view class="cost_record_nav_shift" animation="{{animationNav}}"></view>
+    </view>
+    <!--/消费记录导航-->
 
-      <!--未消费-->
-      <swiper-item>
-        <scroll-view scroll-y class="scroll">
-          <block wx:if="{{orders.unUse.length > 0}}">
-            <view class="been_comment" hover-class="push_class" hover-stay-time="150" wx:for="{{orders.unUse}}" wx:key="*this">
-              <view class="been_comment_content">
-                <image src="{{item.img}}" class="been_comment_img" mode="aspectFill"></image>
-                <view class="been_comment_word">
-                  <view class="been_comment_title">{{item.product_name}}</view>
-                  <view class="been_comment_shop">—{{item.store_name}}</view>
-                  <view class="not_cost_id">
-                    <view class="not_cost_id_title">预约时间</view>
-                    <view class="not_cost_id_num">{{item.schedule?item.schedule:'暂未预约'}}</view>
+    <view class="swiper_wrap">
+      <swiper current="{{current}}" class="swiper_part" bindchange="nextPage">
+
+        <!--未消费-->
+        <swiper-item>
+          <scroll-view scroll-y class="scroll" bindscrolltolower="toMoreOrders">
+            <block wx:if="{{orders.unUse.length > 0}}">
+              <view class="been_comment" hover-class="push_class" hover-stay-time="150" wx:for="{{orders.unUse}}" wx:key="*this">
+                <view class="been_comment_content">
+                  <image src="{{item.img}}" class="been_comment_img" mode="aspectFill"></image>
+                  <view class="been_comment_word">
+                    <view class="been_comment_title">{{item.product_name}}</view>
+                    <view class="been_comment_shop">—{{item.store_name}}</view>
+                    <view class="not_cost_id">
+                      <view class="not_cost_id_title">预约时间</view>
+                      <view class="not_cost_id_num">{{item.schedule?item.schedule:'暂未预约'}}</view>
+                    </view>
                   </view>
                 </view>
+                <view class="been_comment_btn not_cost_btn" catchtap="goToOrder" data-order_id="{{item.number}}">查看</view>
               </view>
-              <view class="been_comment_btn not_cost_btn" catchtap="goToOrder" data-order_id="{{item.number}}">查看</view>
-            </view>
-          </block>
-          <block wx:else>
-            <view class="order-none">——— 暂无消费记录 ———</view>
-          </block>
-        </scroll-view>
-      </swiper-item>
-      <!--/未消费-->
+            </block>
+            <block wx:else>
+              <view class="order-none">——— 暂无消费记录 ———</view>
+            </block>
+          </scroll-view>
+        </swiper-item>
+        <!--/未消费-->
 
-      <!--未评价-->
-      <swiper-item>
-        <scroll-view scroll-y class="scroll">
-          <block wx:if="{{orders.unComment.length > 0}}">
-            <view class="been_comment" hover-class="push_class" hover-stay-time="150" wx:for="{{orders.unComment}}" wx:key="*this">
-              <view class="been_comment_content">
-                <image src="{{item.img}}" class="been_comment_img" mode="aspectFill"></image>
-                <view class="been_comment_word">
-                  <view class="been_comment_title">{{item.product_name}}</view>
-                  <view class="been_comment_shop">—{{item.store_name}}</view>
-                  <view class="not_cost_id">
-                    <view class="not_cost_id_title">下单时间 </view>
-                    <view class="not_comment_score">{{item.time}}</view>
-                  </view>
+        <!--未评价-->
+        <swiper-item>
+          <scroll-view scroll-y class="scroll" bindscrolltolower="toMoreOrders">
+            <block wx:if="{{orders.unComment.length > 0}}">
+              <view class="been_comment" hover-class="push_class" hover-stay-time="150" wx:for="{{orders.unComment}}" wx:key="*this">
+                <view class="been_comment_content">
+                  <image src="{{item.img}}" class="been_comment_img" mode="aspectFill"></image>
+                  <view class="been_comment_word">
+                    <view class="been_comment_title">{{item.product_name}}</view>
+                    <view class="been_comment_shop">—{{item.store_name}}</view>
+                    <view class="not_cost_id">
+                      <view class="not_cost_id_title">下单时间 </view>
+                      <view class="not_comment_score">{{item.time}}</view>
+                    </view>
 
-                  <!-- <view class="not_comment_score">{{item.time}}</view> -->
-                </view>
-              </view>
-              <view class="been_comment_btn not_comment_btn" bindtap="goToComment" data-id="{{item.number}}">去评价</view>
-            </view>
-          </block>
-          <block wx:else>
-            <view class="order-none">——— 暂无消费记录 ———</view>
-          </block>
-        </scroll-view>
-      </swiper-item>
-      <!--/未评价-->
-
-      <!--已评价-->
-      <swiper-item>
-        <scroll-view scroll-y class="scroll">
-          <block wx:if="{{orders.finish.length > 0}}">
-            <view class="been_comment" wx:for="{{orders.finish}}" wx:for-item="finish" wx:key="*this" hover-class="push_class" hover-stay-time="150">
-              <view class="been_comment_content">
-                <image src="{{finish.img}}" class="been_comment_img" mode="aspectFill"></image>
-                <view class="been_comment_word">
-                  <view class="been_comment_title">{{finish.product_name}}</view>
-                  <view class="been_comment_shop">—{{finish.store_name}}</view>
-                  <view class="been_comment_score">
-                    <image src="{{index < finish.score? star_img.ok: star_img.no}}" mode="aspectFit" class="shop_comment_item_score_img" wx:for="{{star_count}}"></image>
+                    <!-- <view class="not_comment_score">{{item.time}}</view> -->
                   </view>
                 </view>
+                <view class="been_comment_btn not_comment_btn" bindtap="goToComment" data-id="{{item.number}}">去评价</view>
               </view>
-              <view class="been_comment_btn">已评价</view>
-            </view>
-          </block>
-          <block wx:else>
-            <view class="order-none">——— 暂无消费记录 ———</view>
-          </block>
-        </scroll-view>
-      </swiper-item>
-      <!--/已评价-->
+            </block>
+            <block wx:else>
+              <view class="order-none">——— 暂无消费记录 ———</view>
+            </block>
+          </scroll-view>
+        </swiper-item>
+        <!--/未评价-->
 
-    </swiper>
-  </view>
+        <!--已评价-->
+        <swiper-item>
+          <scroll-view scroll-y class="scroll" bindscrolltolower="toMoreOrders">
+            <block wx:if="{{orders.finish.length > 0}}">
+              <view class="been_comment" wx:for="{{orders.finish}}" wx:for-item="finish" wx:key="*this" hover-class="push_class" hover-stay-time="150">
+                <view class="been_comment_content">
+                  <image src="{{finish.img}}" class="been_comment_img" mode="aspectFill"></image>
+                  <view class="been_comment_word">
+                    <view class="been_comment_title">{{finish.product_name}}</view>
+                    <view class="been_comment_shop">—{{finish.store_name}}</view>
+                    <view class="been_comment_score">
+                      <image src="{{index < finish.score? star_img.ok: star_img.no}}" mode="aspectFit" class="shop_comment_item_score_img" wx:for="{{star_count}}"></image>
+                    </view>
+                  </view>
+                </view>
+                <view class="been_comment_btn">已评价</view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="order-none">——— 暂无消费记录 ———</view>
+            </block>
+          </scroll-view>
+        </swiper-item>
+        <!--/已评价-->
+
+      </swiper>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="tips">请先登录</view>
+  </block>
+
 </view>

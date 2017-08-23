@@ -1,4 +1,5 @@
 // shop.js
+const app = getApp()
 Page({
 
   /**
@@ -28,7 +29,7 @@ Page({
     current: 0,
 
     //商品目录
-    category_id: 1,
+    category_id: 0,
     category_index: 0,
 
     //评论页面开关
@@ -41,139 +42,17 @@ Page({
       no: '/images/order/star_n.png'
     },
 
-    //模拟数据
-    commodity_category: [
-      {
-        id: 0,
-        name: '医疗'
-      },
-      {
-        id: 1,
-        name: '洗澡'
-      },
-      {
-        id: 2,
-        name: '活体'
-      },
-      {
-        id: 3,
-        name: '美容'
-      },
-      {
-        id: 4,
-        name: '医疗'
-      },
-      {
-        id: 5,
-        name: '洗澡洗澡'
-      },
-      {
-        id: 6,
-        name: '活体'
-      },
-      {
-        id: 7,
-        name: '美容狗狗猫猫'
-      },
-      {
-        id: 8,
-        name: '洗澡洗澡'
-      },
-      {
-        id: 9,
-        name: '活体'
-      },
-      {
-        id: 10,
-        name: '美容狗狗猫猫美容狗狗猫猫'
-      },
-      {
-        id: 11,
-        name: '美容狗狗猫猫'
-      },
-      {
-        id: 12,
-        name: '洗澡洗澡'
-      },
-      {
-        id: 13,
-        name: '活体'
-      },
-      {
-        id: 14,
-        name: '美容狗狗猫猫'
-      },
-      {
-        id: 15,
-        name: '洗澡洗澡'
-      },
-      {
-        id: 16,
-        name: '活体'
-      },
-    ],
+    //触底刷新开关
+    bottomSwitch: {},
 
-    shopItem: {
-      0: [
-        {
-          id: 0,
-          img: 'http://pic.pimg.tw/livilife16888/1339552981-308415971.jpg',
-          title: '狗狗洗澡',
-          price: '60',
-          sell: 13
-        }
-      ]
-    },
+    //接口数据
+    categories: null,
 
-    comments: [
-      {
-        id: 0,
-        avatarUrl: 'http://pic.pimg.tw/livilife16888/1339552981-308415971.jpg',
-        nickname: '小猪猪',
-        product_name: '洗澡',
-        createtime: '2017-02-08',
-        score: 4,
-        content: '服务挺好啊~',
-        img: [
-          'http://imgs6.iaweg.com/pic/HTTP3Bob3RvLmw5OS5jb20vYmlnZ2VyLzMyLzEzOTI3Mjg3OTkwNjNfdXMxdnE0LmpwZwloglog.jpg',
-          'http://i.vividaily.com/2017/01/159d0005b07c18492982-e1484722780384.jpg?ver=20161208',
-          'http://img2.pclady.com.cn/pclady/1008/12/589754_20100727_113602_13.jpg'
-        ],
-        replies: ['谢谢支持！'],
-        likes: 12
-      },
-      {
-        id: 1,
-        avatarUrl: 'http://pic.pimg.tw/livilife16888/1339552981-308415971.jpg',
-        nickname: '天使',
-        product_name: '迷之原力洗澡',
-        createtime: '2017-06-08',
-        score: 4,
-        content: '服务挺好啊服务挺好啊服务挺好啊服务挺好啊服务挺好啊服务挺好啊服务挺好啊~',
-        img: [
-          'http://imgs6.iaweg.com/pic/HTTP3Bob3RvLmw5OS5jb20vYmlnZ2VyLzMyLzEzOTI3Mjg3OTkwNjNfdXMxdnE0LmpwZwloglog.jpg',
-          'http://i.vividaily.com/2017/01/159d0005b07c18492982-e1484722780384.jpg?ver=20161208',
-          'http://img2.pclady.com.cn/pclady/1008/12/589754_20100727_113602_13.jpg'
-        ],
-        replies: ['谢谢支持！谢谢支持！谢谢支持！谢谢支持！谢谢支持！谢谢支持！谢谢支持！谢谢支持！'],
-        likes: 1200
-      },
-    ],
+    shopItem: {},
 
-    store: {
-      full_name: '超级宠物中心连锁店',
-      location: '广东省广州市市桥永恒大街33号',
-      time: '9:00 - 20:00',
-      number: [
-        '1836488951'
-      ],
-      content: '欢迎来到我们的宠物店，热烈欢迎~~~~~~~~',
-      images: [
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfuEwM0Kkl6LhLqhpLRZWpmcTiYTGVP-zA7WM9OYxgiVTfc5eV',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWOFZ93sUBUiDB5kbtwRxCkc4GF31wvtTOz4d5M_a9yB8UmkSI',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScjXjzJz8ruKzky3HByfYq3N9oRHla-HeBigFtC6cHPhtwHmEf'
-      ]
-    }
+    comments: null,
+
+    store: null,
   },
 
   onLoad(options) {
@@ -182,14 +61,90 @@ Page({
     let arr = []
     //评论星数数量
     arr.length = 5
-    wx.setNavigationBarTitle({
-      title: '君悦宠物店',
-    })
     that.setData({
       shop_id: id,
       star_count: arr
     })
+    wx.showNavigationBarLoading()
+    that.firstRequest(id, store => {
+      wx.hideNavigationBarLoading()
+      wx.setNavigationBarTitle({
+        title: store.name,
+      })
+    })
 
+  },
+
+  //初次请求封装
+  firstRequest(id, cb) {
+    const that = this
+    wx.request({
+      url: app.globalData.host_v2 + 'categories/' + id,
+      success: res => {
+        if (200 == res.data.code) {
+          const tmp_id = res.data.data[0].id
+          that.setData({
+            categories: res.data.data,
+            category_id: tmp_id
+          })
+
+          wx.request({
+            url: app.globalData.host_v2 + 'products/' + tmp_id,
+            success: res => {
+              if (200 == res.data.code) {
+                let temp = 'shopItem[' + 0 + ']'
+                that.setData({
+                  [temp]: res.data.data
+                })
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: res.data.msg,
+                })
+              }
+            }
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
+    })
+
+    wx.request({
+      url: app.globalData.host_v2 + 'store/info/' + id,
+      success: res => {
+        if (200 == res.data.code) {
+          that.setData({
+            store: res.data.data
+          })
+          typeof cb === 'function' && cb(res.data.data)
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
+    })
+
+    wx.request({
+      url: app.globalData.host_v2 + 'store/comments/' + id,
+      success: res => {
+        if (200 == res.data.code) {
+          that.setData({
+            comments: res.data.data
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
+    })
   },
 
   //分享
@@ -232,13 +187,57 @@ Page({
     })
   },
 
+  //商品请求
+  getCommodityAPI(id, page, index) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const that = this
+    wx.request({
+      url: app.globalData.host_v2 + 'products/' + id,
+      data: {
+        page: page
+      },
+      success: res => {
+        wx.hideLoading()
+        if (200 == res.data.code) {
+          if (res.data.data.length) {
+            const temp = 'shopItem[' + index + ']'
+            if (1 === page) {
+              that.setData({
+                [temp]: res.data.data
+              })
+            } else {
+              that.setData({
+                [temp]: [...that.data.shopItem[index], ...res.data.data]
+              })
+            }
+          } else {
+            const tmp = 'bottomSwitch[' + index + '].bottom'
+            that.setData({
+              tmp: true
+            })
+          }
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
+    })
+  },
+
   //商品目录切换
   shiftCategory(e) {
     const that = this
+    const id = e.currentTarget.dataset.id
+    const index = e.currentTarget.dataset.index
     that.setData({
-      category_id: e.currentTarget.dataset.id,
-      category_index: e.currentTarget.dataset.index
+      category_id: id,
+      category_index: index
     })
+    that.getCommodityAPI(id, 1, index)
   },
 
   //具体商品跳转

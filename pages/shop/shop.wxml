@@ -15,9 +15,11 @@
       <swiper-item class="shop-content-item">
         <!--左边导航  -->
         <scroll-view class="shop-content-nav" scroll-y>
-          <view class="shop-content-nav-item {{category_id == item.id? 'active': ''}}" wx:for="{{commodity_category}}" data-id="{{item.id}}" wx:key="id" catchtap="shiftCategory" data-index="{{index}}">{{item.name}}</view>
+          <view class="shop-content-nav-item {{category_id == item.id? 'active': ''}}" wx:for="{{categories}}" data-id="{{item.id}}" wx:key="id" catchtap="shiftCategory" data-index="{{index}}">{{item.title}}</view>
         </scroll-view>
-        <scroll-view scroll-y class="shop-content-commodities">
+        <!--/左边导航  -->
+        <!--右边商品  -->
+        <scroll-view scroll-y class="shop-content-commodities" bindscrolltolower="getMoreCommodity">
           <view class="shop_item" wx:for="{{shopItem[category_index]}}" wx:key="id" catchtap="goToCommodity" hover-class="push_class" hover-stay-time="150" data-id="{{item.id}}">
             <view class="shop_item_l">
               <image src="{{item.img}}" class="shop_item_img" mode="aspectFill"></image>
@@ -31,7 +33,7 @@
             <view class="shop_item_r">已售{{item.sell}}份</view>
           </view>
         </scroll-view>
-        <!--/左边导航  -->
+        <!--/右边商品  -->
       </swiper-item>
       <!--/商品  -->
 
@@ -56,7 +58,7 @@
         <view class="shop_info_item">
           <view class="shop_info_item_icon_intro shop_address">
             <image src="/images/shop/address.png" mode="aspectFit" class="shop_info_item_icon"></image>
-            <view class="shop_info_item_intro shop_address">{{store.location}}</view>
+            <view class="shop_info_item_intro shop_address">{{store.address}}</view>
           </view>
           <image src="/images/shop/located.png" mode="aspectFit" class="shop_info_item_icon" bindtap="openLocation"></image>
         </view>
@@ -71,10 +73,10 @@
             <image src="/images/shop/tel_number.png" mode="aspectFit" class="shop_info_item_icon"></image>
           </view>
           <view class="shop_info_item_telgroup">
-            <block wx:for="{{store.number}}" wx:key="*this">
-              <view>{{item}}</view>
-              <image src="/images/shop/call.png" mode="aspectFit" class="shop_info_item_icon" bindtap="callStore" data-tel="{{item}}"></image>
-            </block>
+            <!-- <block wx:for="{{store.number}}" wx:key="*this"> -->
+            <view>{{store.number}}</view>
+            <image src="/images/shop/call.png" mode="aspectFit" class="shop_info_item_icon" bindtap="callStore" data-tel="{{store.number}}"></image>
+            <!-- </block> -->
           </view>
         </view>
         <view class="shop_info_item shop_info_item_last">

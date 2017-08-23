@@ -6,11 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+    userInfo: null,
+
     //导航动画
     animationNav: {},
 
     //当前页
     current: 0,
+    state: 1,
 
     //星星
     star_count: [],
@@ -22,53 +26,26 @@ Page({
     //消费记录导航
     cost_records: [
       {
-        id: 0,
+        id: 1,
         name: '未使用'
       },
       {
-        id: 1,
+        id: 2,
         name: '未评价'
       },
       {
-        id: 2,
+        id: 3,
         name: '已评价'
       },
     ],
 
-    //模拟数据
-    orders: {
-      unUse: [
-        {
-          id: 0,
-          img: 'http://img.t.388g.com/27/images/201611/1480040435897352.jpg',
-          product_name: '猫咪洗澡',
-          store_name: 'XX宠物店',
-          schedule: '2017-07-30 18:20',
-          number: '4501385485215412'
-        }
-      ],
-      unComment: [
-        {
-          id: 0,
-          img: 'http://img.t.388g.com/27/images/201611/1480040435897352.jpg',
-          product_name: '猫咪洗澡',
-          store_name: 'XX宠物店',
-          time: '2017-07-30 18:20'
-        }
-      ],
-      finish: [
-        {
-          id: 0,
-          img: 'http://img.t.388g.com/27/images/201611/1480040435897352.jpg',
-          product_name: '猫咪洗澡',
-          store_name: 'XX宠物店',
-          score: 3
-        }
-      ]
-    },
+    //控制触底刷新
+    orderSwitch: {},
+    flag: false,
+    pages: {},
 
     //接口数据
-    // orders: null,
+    orders: {},
   },
 
   onLoad(options) {
@@ -80,10 +57,76 @@ Page({
     that.setData({
       star_count: arr
     })
+    that.orderRequestAPI(1, that.data.state)
   },
 
   onShow() {
     const that = this
+    that.setData({
+      userInfo: app.globalData.userInfo
+    })
+  },
+
+  //订单请求
+  orderRequestAPI(page, state) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const that = this
+    wx.request({
+      url: app.globalData.host_v2 + 'my/orders',
+      data: {
+        page,
+        state,
+      },
+      success: res => {
+        wx.hideLoading()
+        if (200 == res.data.code) {
+          const pages = 'pages[' + state + ']'
+          that.setData({
+            [pages]: page + 1,
+            flag: false
+          })
+          if (res.data.data.length) {
+            const tmp = 'orders[' + state + ']'
+            if (1 === page) {
+              that.setData({
+                [tmp]: res.data.data
+              })
+            } else {
+              that.setData({
+                [tmp]: [...that.data.orders[state], res.data.data]
+              })
+            }
+          } else {
+            const tmp = 'orderSwitch[' + state + ']'
+            that.setData({
+              [tmp]: true
+            })
+          }
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
+    })
+  },
+
+  //触底加载订单请求
+  toMoreOrders() {
+    const that = this
+    const state = that.data.state
+
+    //防止重复触发和主动关闭
+    if (that.data.flag || that.data.orderSwitch[state]) {
+      return false
+    }
+    that.setData({
+      flag: true
+    })
+    that.orderRequestAPI(that.data.pages[state], state)
   },
 
   //动画封装
@@ -99,21 +142,31 @@ Page({
   //点击切换函数
   shiftPage(e) {
     const that = this
-    let id = e.currentTarget.dataset.index
+    const index = e.currentTarget.dataset.index
+    const id = e.currentTarget.dataset.id
     that.setData({
-      current: id,
-      animationNav: that.animationNav(id).export()
+      current: index,
+      state: id,
+      animationNav: that.animationNav(index).export()
     })
+    if (!that.data.orders[id] && !that.data.orderSwitch[id]) {
+      that.orderRequestAPI(1, id)
+    }
   },
 
   //swiper变动切换函数
   nextPage(e) {
     const that = this
-    let index = e.detail.current
+    const index = e.detail.current
+    const id = index + 1
     that.setData({
       current: index,
+      state: id,
       animationNav: that.animationNav(index).export()
     })
+    if (!that.data.orders[id] && !that.data.orderSwitch[id]) {
+      that.orderRequestAPI(1, id)
+    }
   },
 
   //评论跳转

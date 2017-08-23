@@ -128,25 +128,39 @@ Page({
 
   firstRequest(cb) {
     const that = this
-    wx.getLocation({
-      success: location => {
-        wx.request({
-          url: app.globalData.host + 'stores',
-          data: {
-            location: location.latitude + ',' + location.longitude
-          },
-          success: res => {
-            if (200 == res.data.code) {
-              typeof cb == "function" && cb(res.data.data)
-            } else {
-              wx.showModal({
-                title: '提示',
-                content: res.data.msg,
-              })
-            }
-          }
-        })
-      },
+    // wx.getLocation({
+    //   success: location => {
+    //     wx.request({
+    //       url: app.globalData.host_v2 + 'stores',
+    //       data: {
+    //         location: location.latitude + ',' + location.longitude
+    //       },
+    //       success: res => {
+    //         if (200 == res.data.code) {
+    //           typeof cb == "function" && cb(res.data.data)
+    //         } else {
+    //           wx.showModal({
+    //             title: '提示',
+    //             content: res.data.msg,
+    //           })
+    //         }
+    //       }
+    //     })
+    //   },
+    // })
+
+    wx.request({
+      url: app.globalData.host_v2 + 'stores',
+      success: res => {
+        if (200 == res.data.code) {
+          typeof cb == "function" && cb(res.data.data)
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
     })
   },
 

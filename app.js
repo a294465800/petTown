@@ -4,9 +4,6 @@ App({
   },
   onShow() {
     const that = this
-    if (that.globalData.userInfo) {
-      this.checkLogin()
-    }
     that.getLocation()
   },
 
