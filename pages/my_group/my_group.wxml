@@ -1,0 +1,93 @@
+<!--my_group.wxml-->
+<view class="container">
+
+  <!--拼团导航  -->
+  <view class="shop-nav">
+    <view class="shop-nav-item {{current == index ? 'active': ''}}" wx:for="{{group_nav}}" wx:key="id" data-index="{{index}}" catchtap="shiftPage">{{item.name}}</view>
+    <view class="shop-nav-item-border" animation="{{animationNav}}"></view>
+  </view>
+  <!--/拼团导航  -->
+
+  <!--拼团内容  -->
+  <view class="swiper-wrap">
+    <swiper current="{{current}}" bindchange="nextPage">
+      <!--正在拼团  -->
+      <swiper-item>
+        <scroll-view scroll-y class="swiper-scroll" bindscrolltolower="toBottomGroup" data-state="1">
+          <block wx:if="{{groups[1].length}}">
+            <view class="grouping-item" wx:for="{{groups[1]}}" wx:for-item="grouping" wx:key="id">
+              <view class="grouping-item-top" catchtap="goToCommodity" data-id="{{grouping.id}}" hover-class="push_class" hover-stay-time="150">
+                <image src="{{grouping.img}}" mode="aspectFill" class="grouping-item-img"></image>
+                <view class="grouping-item-content">
+                  <view class="grouping-item-name">{{grouping.product}}</view>
+                  <view class="grouping-item-shop">—{{grouping.store}}</view>
+                  <view class="grouping-item-price">￥<text class="grouping-item-now-price">{{grouping.price}}</text>
+                    <text class="grouping-item-pre-price">原价：￥{{grouping.origin_price}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="grouping-item-bottom">
+                <view class="grouping-item-time">
+                  <icon type="waiting" size="16" color="#ff963d" /> 剩余 {{left_time[index]}}
+                </view>
+                <view class="grouping-item-invite">
+                  <image src="/images/icon/share.png" mode="aspectFit"></image>
+                  <button open-type="share" class="grouping-item-button" data-id="{{grouping.id}}">邀请好友</button>
+                </view>
+              </view>
+            </view>
+            <view class="index-tips" hidden="{{!close[1]}}">—— 已加载全部拼团信息 ——</view>
+          </block>
+          <block wx:else>
+            <view class="index-tips">—— 暂无拼团 ——</view>
+          </block>
+        </scroll-view>
+      </swiper-item>
+      <!--/正在拼团  -->
+
+      <!--拼团成功  -->
+      <swiper-item>
+        <scroll-view scroll-y class="swiper-scroll" bindscrolltolower="toBottomGroup" data-state="2">
+          <block wx:if="{{groups[2].length}}">
+            <view class="grouping-item" wx:for="{{groups[2]}}" wx:for-item="grouping" wx:key="id">
+              <view class="grouping-item-top">
+                <image src="{{grouping.img}}" mode="aspectFill" class="grouping-item-img"></image>
+                <view class="grouping-item-content">
+                  <view class="grouping-item-name">{{grouping.product}}</view>
+                  <view class="grouping-item-shop">—{{grouping.store}}</view>
+                  <view class="grouping-item-price">￥<text class="grouping-item-now-price">{{grouping.price}}</text>
+                    <text class="grouping-item-pre-price">原价：￥{{grouping.origin_price}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="grouping-item-bottom">
+                <view class="grouping-item-time success">
+                  <icon type="success" size="16" /> 拼团成功
+                </view>
+                <block wx:if="{{grouping.finish}}">
+                  <view class="grouping-item-invite disabled">
+                    <!-- <image src="/images/icon/more.png" mode="widthFix"></image> -->
+                    <button class="grouping-item-button" data-id="{{grouping.number}}">已消费</button>
+                  </view>
+                </block>
+                <block wx:else>
+                  <view class="grouping-item-invite">
+                    <image src="/images/icon/more.png" mode="widthFix"></image>
+                    <button class="grouping-item-button" catchtap="goToOrder" data-id="{{grouping.number}}">查看详情</button>
+                  </view>
+                </block>
+              </view>
+            </view>
+            <view class="index-tips" hidden="{{!close[2]}}">—— 已加载全部拼团信息 ——</view>
+          </block>
+          <block wx:else>
+            <view class="index-tips">—— 暂无拼团 ——</view>
+          </block>
+        </scroll-view>
+      </swiper-item>
+      <!--/拼团成功  -->
+
+    </swiper>
+  </view>
+  <!--/拼团内容  -->
+</view>

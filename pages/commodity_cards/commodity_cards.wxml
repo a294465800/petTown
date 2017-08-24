@@ -1,0 +1,65 @@
+<!--commodity_cards.wxml-->
+<view class="container">
+
+  <!--次数卡导航  -->
+  <view class="shop-nav">
+    <view class="shop-nav-item {{current == index ? 'active': ''}}" wx:for="{{cards_nav}}" wx:key="id" data-index="{{index}}" catchtap="shiftPage">{{item.name}}</view>
+    <view class="shop-nav-item-border" animation="{{animationNav}}"></view>
+  </view>
+  <!--/次数卡导航  -->
+
+  <!--内容  -->
+  <view class="swiper-wrap">
+    <swiper current="{{current}}" bindchange="nextPage">
+      <!--使用中  -->
+      <swiper-item>
+        <scroll-view scroll-y class="swiper-scroll" bindscrolltolower="toBottomCards" data-state="1">
+          <block wx:if="{{cards[1].length}}">
+            <view class="cards-item" wx:for="{{cards[1]}}" wx:key="id" wx:for-item="card_use" catchtap="goToCard" hover-class="push_class" hover-stay-time="150" data-id="{{card_use.id}}">
+              <image src="{{card_use.img}}" mode="aspectFill" class="cards-item-img"></image>
+              <view class="cards-item-content">
+                <view class="cards-item-name">{{card_use.product}}</view>
+                <view class="cards-item-shop">—{{card_use.store}}</view>
+                <view class="cards-item-info">
+                  <view class="cards-item-price">￥<text class="cards-item-now-price">{{card_use.price}}</text><text class="cards-item-pre-price">原价：￥{{card_use.origin_price}}</text></view>
+                  <view class="cards-item-time">剩余{{card_use.times}}次</view>
+                </view>
+              </view>
+            </view>
+            <view class="index-tips" hidden="{{!close[1]}}">—— 已加载全部次数卡 ——</view>
+          </block>
+          <block wx:else>
+            <view class="index-tips">—— 暂无次数卡 ——</view>
+          </block>
+        </scroll-view>
+      </swiper-item>
+      <!--/使用中  -->
+
+      <!--拼团成功  -->
+      <swiper-item>
+        <scroll-view scroll-y class="swiper-scroll" bindscrolltolower="toBottomCards" data-state="2">
+          <block wx:if="{{cards[2].length}}">
+            <view class="cards-item" wx:for="{{cards[2]}}" wx:key="id" wx:for-item="card_lost">
+              <image src="{{card_lost.img}}" mode="aspectFill" class="cards-item-img"></image>
+              <view class="cards-item-content">
+                <view class="cards-item-name">{{card_lost.product}}</view>
+                <view class="cards-item-shop">—{{card_lost.store}}</view>
+                <view class="cards-item-info">
+                  <view class="cards-item-price">￥<text class="cards-item-now-price">{{card_lost.price}}</text><text class="cards-item-pre-price">原价：￥{{card_lost.origin_price}}</text></view>
+                </view>
+              </view>
+              <image src="/images/icon/lost.png" mode="aspectFill" class="coupon_item_lost"></image>
+            </view>
+            <view class="index-tips" hidden="{{!close[2]}}">—— 已加载全部次数卡 ——</view>
+          </block>
+          <block wx:else>
+            <view class="index-tips">—— 暂无次数卡 ——</view>
+          </block>
+        </scroll-view>
+      </swiper-item>
+      <!--/拼团成功  -->
+
+    </swiper>
+  </view>
+  <!--/内容  -->
+</view>

@@ -45,15 +45,26 @@ Page({
     return false
   },
 
+
+  //我的拼团跳转
+  goToMygroup() {
+    wx.navigateTo({
+      url: '/pages/my_group/my_group',
+    })
+  },
+
+  //商品次数
+  goToCards() {
+    wx.navigateTo({
+      url: '/pages/commodity_cards/commodity_cards',
+    })
+  },
+
   //优惠券跳转
   goToCoupon() {
-    if (!app.globalData.userInfo) {
-      app.goToTelInput()
-    } else {
-      wx.navigateTo({
-        url: '/pages/coupon/coupon',
-      })
-    }
+    wx.navigateTo({
+      url: '/pages/coupon/coupon',
+    })
   },
 
   //关于跳转
@@ -65,12 +76,8 @@ Page({
 
   //积分跳转
   goToPoints() {
-    if (!app.globalData.userInfo) {
-      app.goToTelInput()
-    } else {
-      wx.navigateTo({
-        url: '/pages/points/points',
-      })
-    }
+    wx.navigateTo({
+      url: '/pages/points/points',
+    })
   }
 })

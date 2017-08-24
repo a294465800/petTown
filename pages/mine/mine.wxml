@@ -5,6 +5,14 @@
     <view class="mine_head_info">{{userInfo?userInfo.nickName:'请登录'}}</view>
   </view>
   <block wx:if="{{userInfo}}">
+    <view class="mine_item" hover-class="push_class" hover-stay-time="150" bindtap="goToMygroup">
+      <image src="/images/mine/group.png" mode="aspectFit" class="mine_item_img"></image>
+      <view class="mine_item_word">我的拼团</view>
+    </view>
+    <view class="mine_item" hover-class="push_class" hover-stay-time="150" bindtap="goToCards">
+      <image src="/images/mine/cards.png" mode="aspectFit" class="mine_item_img"></image>
+      <view class="mine_item_word">我的次数卡</view>
+    </view>
     <view class="mine_item" hover-class="push_class" hover-stay-time="150" bindtap="goToCoupon">
       <image src="/images/mine/coupon.png" mode="aspectFit" class="mine_item_img"></image>
       <view class="mine_item_word">优惠券</view>
