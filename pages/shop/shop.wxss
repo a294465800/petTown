@@ -112,6 +112,15 @@
   width: 140rpx;
   height: 140rpx;
   border: 2rpx solid #ccc;
+  position: relative;
+}
+
+.shop_item_pin {
+  position: absolute;
+  top: 0;
+  left: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .shop_item_content {

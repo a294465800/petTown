@@ -49,28 +49,28 @@
 
   <!--下单成功-->
   <view class="buy_interface" hidden="{{!buy}}">
-    <image src="/images/commodity/buy_bg.png" class="buy_interface_img" mode="widthFix">
+    <image src="/images/shop/buy_bg.png" class="buy_interface_img" mode="widthFix">
       <view class="buy_interface_part">
         <view class="buy_interface_title">
           <icon type="success" color="#ff6464" size="18" />
           <text>购买成功！</text>
         </view>
         <view class="buy_interface_name">
-          <image src="/images/commodity/commodity.png" class="buy_interface_icon"></image>
+          <image src="/images/shop/commodity.png" class="buy_interface_icon"></image>
           <view class="buy_interface_name_word">商品：{{commodity.title}}</view>
         </view>
         <view class="buy_interface_name">
-          <image src="/images/commodity/price.png" class="buy_interface_icon"></image>
+          <image src="/images/shop/price.png" class="buy_interface_icon"></image>
           <view class="buy_interface_price">价格：
             <text class="buy_interface_price_name">￥{{commodity.price}}</text>
           </view>
         </view>
         <view class="buy_interface_name">
-          <image src="/images/commodity/id.png" class="buy_interface_icon"></image>
+          <image src="/images/shop/id.png" class="buy_interface_icon"></image>
           <view class="buy_interface_name_word">订单号：{{order_id}}</view>
         </view>
         <view class="buy_interface_name">
-          <image src="/images/commodity/order.png" class="buy_interface_icon"></image>
+          <image src="/images/shop/order.png" class="buy_interface_icon"></image>
           <view class="buy_interface_order">
             <view class="buy_interface_order_name">预约时间：</view>
             <view class="buy_interface_order_time">
