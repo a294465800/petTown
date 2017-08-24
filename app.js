@@ -10,6 +10,7 @@ App({
   globalData: {
     userInfo: null,
     host: 'http://119.23.202.220/api/',
+    host_v1: 'http://119.23.202.220/api/v1/',
     host_v2: 'http://119.23.202.220/api/v2/',
     // host: 'https://www.sennkisystem.cn/api/v2/',
     // header: {

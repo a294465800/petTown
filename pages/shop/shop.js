@@ -237,7 +237,9 @@ Page({
       category_id: id,
       category_index: index
     })
-    that.getCommodityAPI(id, 1, index)
+    if (!that.data.shopItem[index]) {
+      that.getCommodityAPI(id, 1, index)
+    }
   },
 
   //具体商品跳转
@@ -245,8 +247,39 @@ Page({
     const that = this
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/commodity/commodity?id=' + id,
+      url: '/pages/commodity/commodity?commodity_id=' + id,
     })
+  },
+
+  commentGood(e) {
+    if (!app.globalData.userInfo) {
+      app.goToTelInput()
+    } else {
+      const that = this
+      let id = e.currentTarget.dataset.id
+      let index = e.currentTarget.dataset.index
+      let temp = "comments[" + index + '].likes'
+      wx.request({
+        url: app.globalData.host_v2 + 'product/comment/like',
+        method: 'POST',
+        data: {
+          comment_id: id,
+          token: app.globalData.token
+        },
+        success: res => {
+          if (200 == res.data.code) {
+            that.setData({
+              [temp]: (Number(that.data.comments[index].likes) + Number(res.data.data))
+            })
+          } else {
+            wx.showToast({
+              title: '点赞失败',
+            })
+          }
+        }
+      })
+    }
+
   },
 
   //评论图片预览

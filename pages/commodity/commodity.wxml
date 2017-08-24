@@ -1,114 +1,138 @@
 <!--commodity.wxml-->
-<view class="container {{buy?'stop_scroll':''}}">
-  <!--商品图片展示-->
-  <swiper indicator-dots interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicator_color}}" indicator-active-color="{{indicator_active_color}}" class="commodity_img">
-    <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
-      <image src="{{item}}" class="roll_img" mode="aspectFill" data-url="{{item}}" data-imggup="{{imgUrls}}" bindtap="preImg"></image>
-    </swiper-item>
-  </swiper>
-  <!--/商品图片展示-->
+<block wx:if="{{commodity}}">
+  <view class="container {{buy?'stop_scroll':''}}">
+    <!--商品图片展示-->
+    <swiper indicator-dots interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicator_color}}" indicator-active-color="{{indicator_active_color}}" class="commodity_img">
+      <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
+        <image src="{{item}}" class="roll_img" mode="aspectFill" data-url="{{item}}" data-imggup="{{imgUrls}}" bindtap="preImg"></image>
+      </swiper-item>
+    </swiper>
+    <!--/商品图片展示-->
 
-  <!--商品名字价格-->
-  <view class="commodity_info">
-    <view class="commodity_name">{{commodity.title}}</view>
-    <view class="commodity_info_sell">
-      <view class="commodity_info_tips">{{comodity.remark}}</view>
-      <view class="commodity_info_sellnum">
-        <icon type="success" size="13" color="#666" class="sell_icon" />已售{{commodity.sell}}</view>
-    </view>
-  </view>
-  <!--/商品名字价格-->
-
-  <!--产品说明-->
-  <view class="commodity_description">
-    <view class="commodity_description_logo">
-      <image src="/images/shop/description.png" mode="aspectFit" class="commodity_icon"></image>
-      <view class="commodity_description_title">产品说明</view>
-    </view>
-    <view class="commodity_description_info">
-      <text>{{commodity.description}}</text>
-    </view>
-  </view>
-  <!--/产品说明-->
-
-  <!--购买须知-->
-  <view class="commodity_notes">
-    <view class="commodity_notes_logo">
-      <image src="/images/shop/notes.png" mode="aspectFit" class="commodity_icon"></image>
-      <view class="commodity_notes_title">购买须知</view>
-    </view>
-    <view class="commodity_notes_info">
-      <text>{{commodity.notice}}</text>
-    </view>
-  </view>
-  <!--/购买须知-->
-
-  <!--评论详情-->
-  <view class="commodity_comment">
-    <view class="commodity_comment_logo">
-      <image src="/images/shop/comment.png" mode="aspectFit" class="commodity_icon"></image>
-      <view class="commodity_comment_title">评论详情</view>
-    </view>
-    <include src="../common/comments.wxml" />
-    <view class="commodity_comment_more">
-      <view class="commodity_comment_more_num">共{{commodity.commentNumber}}条评论</view>
-      <view class="commodity_comment_more_btn" catchtap="goToAllComments" data-id="{{commodity.id}}">
-        <view>查看更多</view>
-        <image src="/images/icon/back-icon.png" mode="aspectFill" class="commodity_comment_more_btn_img"></image>
+    <!--商品名字价格-->
+    <view class="commodity_info">
+      <view class="commodity_name">{{commodity.title}}</view>
+      <view class="commodity_info_sell">
+        <!-- <view class="commodity_info_tips">{{comodity.remark}}</view> -->
+        <view class="commodity_price_first">原价： ￥{{commodity.entity_price}}</view>
+        <view class="commodity_info_sellnum">
+          <icon type="success" size="13" class="sell_icon" />已售{{commodity.sell}}
+        </view>
       </view>
+      <block wx:if="{{commodity.canGroup}}">
+        <view class="current_group_info">已团{{commodity.groupCount}}次 ● {{commodity.group}}人团</view>
+      </block>
     </view>
-  </view>
-  <!--/评论详情-->
+    <!--/商品名字价格-->
 
-  <!--购买-->
-  <view class="commodity_buy">
-    <view class="commodity_price">￥
-      <text class="commodity_price_number">{{commodity.price}}</text>
-      <view class="commodity_price_first">实体价： ￥{{commodity.entity_price}}</view>
-    </view>
-    <view class="commodity_buy_btn" bindtap="buyCommodity" data-id="{{commodity.id}}">立即下单</view>
-  </view>
-  <!--/购买-->
-
-
-  <!--下单成功-->
-  <view class="buy_interface" hidden="{{!buy}}">
-    <image src="/images/shop/buy_bg.png" class="buy_interface_img" mode="widthFix">
-      <view class="buy_interface_part">
-        <view class="buy_interface_title">
-          <icon type="success" color="#ff6464" size="18" />
-          <text>购买成功！</text>
+    <!--拼团信息  -->
+    <block wx:if="{{commodity.canGroup}}">
+      <view class="commodity_group">
+        <view class="commodity_group_logo">
+          <image src="/images/shop/group.png" mode="aspectFit" class="commodity_icon"></image>
+          <view class="commodity_description_title">正在拼团</view>
         </view>
-        <view class="buy_interface_name">
-          <image src="/images/shop/commodity.png" class="buy_interface_icon"></image>
-          <view class="buy_interface_name_word">商品：{{commodity.title}}</view>
+        <view class="commodity_group_list">
+          <block wx:if="{{commodity.groupList.length > 0}}">
+            <view class="commodity_group_item" wx:for="{{commodity.groupList}}" wx:key="id" wx:for-item="group">
+              <view class="commodity_group_info">
+                <view class="commodity_group_info_imgs">
+                  <block wx:for="{{group_imgs}}" wx:for-index="group_img">
+                    <block wx:if="{{group_img < commodity.group && group_img < 3}}">
+                      <block wx:if="{{group.userImg[group_img]}}">
+                        <image src="{{group.userImg[group_img]}}" mode="aspectFill" class="commodity_group_info_img"></image>
+                      </block>
+                      <block wx:else>
+                        <image src="/images/commodity/query.png" mode="aspectFill" class="commodity_group_info_img"></image>
+                      </block>
+                    </block>
+                  </block>
+                </view>
+                <view class="commodity_group_info_time">还差{{group.limit}}人，剩余 {{left_time[index]}}</view>
+              </view>
+              <view class="commodity_group_btn" catchtap="joinGroup" data-id="{{group.id}}">立即参团</view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="index-tips">—— 暂时没有拼团信息 ——</view>
+          </block>
         </view>
-        <view class="buy_interface_name">
-          <image src="/images/shop/price.png" class="buy_interface_icon"></image>
-          <view class="buy_interface_price">价格：
-            <text class="buy_interface_price_name">￥{{commodity.price}}</text>
-          </view>
-        </view>
-        <view class="buy_interface_name">
-          <image src="/images/shop/id.png" class="buy_interface_icon"></image>
-          <view class="buy_interface_name_word">订单号：{{order_id}}</view>
-        </view>
-        <view class="buy_interface_name">
-          <image src="/images/shop/order.png" class="buy_interface_icon"></image>
-          <view class="buy_interface_order">
-            <view class="buy_interface_order_name">预约时间：</view>
-            <view class="buy_interface_order_time">
-              <picker mode="date" start="{{(today_year-1)+'-01-01'}}" end="{{(today_year+1)+'-12-31'}}" value="{{date}}" bindchange="getDate">{{date}}</picker>
-              <picker mode="time" start="00:00" end="24:00" value="{{time}}" bindchange="getTime">{{time}}</picker>
+        <block wx:if="{{commodity.groupList.length > 0}}">
+          <view class="commodity_description_info">
+            <view class="commodity_group_more_btn" catchtap="goToAllGroups" data-id="{{commodity.id}}" data-limit="{{commodity.group}}">
+              <text>查看更多</text>
+              <image src="/images/icon/back-icon.png" mode="aspectFill" class="commodity_comment_more_btn_img"></image>
             </view>
           </view>
-        </view>
-        <view class="buy_interface_btns">
-          <view class="buy_interface_btn" bindtap="getOrderTime">预约</view>
-          <view class="buy_interface_btn cancel" bindtap="cancelOrderTime">暂不预约</view>
+        </block>
+      </view>
+    </block>
+    <!--/拼团信息  -->
+
+    <!--产品说明-->
+    <view class="commodity_description">
+      <view class="commodity_description_logo">
+        <image src="/images/shop/description.png" mode="aspectFit" class="commodity_icon"></image>
+        <view class="commodity_description_title">产品说明</view>
+      </view>
+      <view class="commodity_description_info">
+        <text>{{commodity.description}}</text>
+      </view>
+    </view>
+    <!--/产品说明-->
+
+    <!--购买须知-->
+    <view class="commodity_notes">
+      <view class="commodity_notes_logo">
+        <image src="/images/shop/notes.png" mode="aspectFit" class="commodity_icon"></image>
+        <view class="commodity_notes_title">购买须知</view>
+      </view>
+      <view class="commodity_notes_info">
+        <text>{{commodity.notice}}</text>
+      </view>
+    </view>
+    <!--/购买须知-->
+
+    <!--评论详情-->
+    <view class="commodity_comment">
+      <view class="commodity_comment_logo">
+        <image src="/images/shop/comment.png" mode="aspectFit" class="commodity_icon"></image>
+        <view class="commodity_comment_title">评论详情</view>
+      </view>
+      <include src="../common/comments.wxml" />
+      <view class="commodity_comment_more">
+        <view class="commodity_comment_more_num">共{{commodity.commentNumber}}条评论</view>
+        <view class="commodity_comment_more_btn" catchtap="goToAllComments" data-id="{{commodity.id}}">
+          <view>查看更多</view>
+          <image src="/images/icon/back-icon.png" mode="aspectFill" class="commodity_comment_more_btn_img"></image>
         </view>
       </view>
-    </image>
+    </view>
+    <!--/评论详情-->
+
+    <!--购买-->
+    <view class="commodity_buy">
+      <view class="commodity_buy_btn buy_alone" catchtap="goToBuySingle" data-id="{{commodity.id}}">
+        <view>￥<text class="buy_bt_price">{{commodity.price}}</text></view>
+        <view>直接购买</view>
+      </view>
+      <block wx:if="{{commodity.canGroup}}">
+        <view class="commodity_buy_btn buy_together" catchtap="buyCommodity" data-id="{{commodity.id}}">
+          <view>￥<text class="buy_bt_price ">{{commodity.groupPrice}}</text></view>
+          <view>立即开团</view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="commodity_buy_btn buy_together disabled">
+          <view class="buy_bt_price">暂无拼团</view>
+          <view>敬请期待···</view>
+        </view>
+      </block>
+    </view>
+    <!--/购买-->
+
   </view>
-  <!--/下单成功-->
-</view>
+</block>
+<block wx:else>
+  <view class="container_bg"></view>
+</block>

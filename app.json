@@ -12,6 +12,9 @@
     "pages/more_info/more_info",
     "pages/cost_record/cost_record",
     "pages/tel_input/tel_input",
+    "pages/single_buy/single_buy",
+    "pages/group_buy/group_buy",
+    "pages/all_comment/all_comment",
     "pages/logs/logs"
   ],
   "window": {

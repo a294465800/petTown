@@ -1,0 +1,6 @@
+<!--all_comment.wxml-->
+<view class="container">
+  <include src="../common/comments.wxml" />
+  <view class="dynamic_bottom" hidden="{{!tips_flag}}">评论加载中</view>
+  <view class="dynamic_bottom" hidden="{{!tips_all}}">——— 已加载全部评论 ———</view>
+</view>

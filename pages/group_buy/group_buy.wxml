@@ -1,0 +1,92 @@
+<!--group_buy.wxml-->
+<view class="container">
+  <!--商品  -->
+  <view class="commodity-item">
+    <image src="{{commodity.product_img}}" mode="aspectFill" class="commodity-item-img"></image>
+    <view class="commodity-item-content">
+      <view class="commodity-item-name">{{commodity.product}}</view>
+      <view class="commodity-item-shop">—{{commodity.store}}</view>
+      <view class="commodity-item-price">
+        <view>￥<text class="commodity-item-now-price">{{commodity.price}}</text>
+          <text class="commodity-item-pre-price">原价：￥{{commodity.origin_price}}</text>
+        </view>
+        <view class="commodity-item-number">{{commodity.number}}人团</view>
+      </view>
+    </view>
+  </view>
+  <!--商品  -->
+
+  <!--参团人员  -->
+  <view class="commodity-group-people">
+    <block wx:if="{{commodity.limit}}">
+      <view class="commodity-group-title">· · · · 还差{{commodity.limit}}人，仅剩 {{left_time}} · · · ·</view>
+    </block>
+    <block wx:else>
+      <view class="commodity-group-title">· · · · 开团成功！ · · · ·</view>
+    </block>
+    <view class="commodity-group-imgs">
+      <image src="{{item}}" class="commodity-group-img" mode="aspectFill" wx:for="{{commodity.userImg}}" wx:key="*this"></image>
+    </view>
+  </view>
+  <!--/参团人员  -->
+
+  <!--产品说明-->
+  <view class="commodity_description">
+    <view class="commodity_description_logo">
+      <image src="/images/commodity/description.png" mode="aspectFit" class="commodity_icon"></image>
+      <view class="commodity_description_title">产品说明</view>
+    </view>
+    <view class="commodity_notes_info">
+      <text>{{commodity.product_description}}</text>
+    </view>
+  </view>
+  <!--/产品说明-->
+
+  <!--购买须知-->
+  <view class="commodity_notes">
+    <view class="commodity_notes_logo">
+      <image src="/images/commodity/notes.png" mode="aspectFit" class="commodity_icon"></image>
+      <view class="commodity_notes_title">购买须知</view>
+    </view>
+    <view class="commodity_notes_info">
+      <text>{{commodity.product_notice}}</text>
+    </view>
+  </view>
+  <!--/购买须知-->
+
+  <!--拼团说明-->
+  <view class="commodity_description">
+    <view class="commodity_description_logo">
+      <image src="/images/commodity/description.png" mode="aspectFit" class="commodity_icon"></image>
+      <view class="commodity_description_title">拼团说明</view>
+    </view>
+    <view class="commodity_description_info">
+      <text>1. 达到拼团人数后即拼团成功。
+      2. 24小时后开团不成功自动退款。
+      3. 参与过的拼团可在我的拼团中查看</text>
+    </view>
+  </view>
+  <!--/拼团说明-->
+
+  <!--购买  -->
+  <block wx:if="{{commodity.limit}}">
+    <view class="commodity_buy">
+      <view class="commodity_buy_btn buy_together" catchtap="buyCommodity" data-id="{{commodity.id}}">
+        <view>￥<text class="buy_bt_price ">{{commodity.price}}</text></view>
+        <view>一键拼团</view>
+      </view>
+    </view>
+  </block>
+
+
+  <block wx:else>
+    <view class="commodity_buy">
+      <view class="commodity_buy_btn buy_together disabled">
+        <view>已满员</view>
+        <view>拼团成功</view>
+      </view>
+    </view>
+  </block>
+  <!--/购买  -->
+
+</view>

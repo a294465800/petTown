@@ -1,0 +1,90 @@
+<!--single_buy.wxml-->
+<view class="container">
+  <!--商品  -->
+  <view class="commodity-item">
+    <image src="{{commodity.img}}" mode="aspectFill" class="commodity-item-img"></image>
+    <view class="commodity-item-content">
+      <view class="commodity-item-name">{{commodity.name}}</view>
+      <view class="commodity-item-price">￥<text class="commodity-item-now-price">{{commodity.price}}</text>
+        <text class="commodity-item-pre-price">原价：￥{{commodity.origin_price}}</text>
+      </view>
+    </view>
+  </view>
+  <!--商品  -->
+
+  <!--优惠券选择  -->
+  <view class="commodity-coupon">
+    <view class="commodity-coupon-titile">可用优惠券</view>
+    <view class="commodity-coupon-list">
+      <block wx:if="{{commodity.coupons.length > 0}}">
+        <radio-group bindchange="getCoupon">
+          <label wx:for="{{commodity.coupons}}" wx:for-item="coupon">
+          <view class="commodity-coupon-item">
+            <view class="commodity-coupon-item-content">
+              <radio value="{{index}}" color="#ff6464" name="coupon"/>{{coupon.title}}
+            </view>
+            <view class="commodity-coupon-item-price">{{coupon.price}}</view>
+          </view> 
+        </label>
+        </radio-group>
+      </block>
+      <block wx:else>
+        <view class="index-tips">—— 暂无可用优惠券 ——</view>
+      </block>
+    </view>
+  </view>
+  <!--/优惠券选择  -->
+
+  <!--购买  -->
+
+  <view class="commodity-buy">
+    <view class="commodity-item-price">￥<text class="commodity-item-now-price">{{end_price ? end_price : commodity.price}}</text>
+      <text class="commodity-item-pre-price">原价：￥{{commodity.origin_price}}</text>
+    </view>
+    <view class="commodity-buy-btn" catchtap="buyCommodity" data-id="{{commodity_id}}">立即下单</view>
+  </view>
+
+  <!--/购买  -->
+
+
+  <!--下单成功-->
+  <view class="buy_interface" hidden="{{!buy}}">
+    <image src="/images/commodity/buy_bg.png" class="buy_interface_img" mode="widthFix">
+      <view class="buy_interface_part">
+        <view class="buy_interface_title">
+          <icon type="success" color="#ff6464" size="18" />
+          <text>购买成功！</text>
+        </view>
+        <view class="buy_interface_name">
+          <image src="/images/commodity/commodity.png" class="buy_interface_icon"></image>
+          <view class="buy_interface_name_word">商品：{{commodity.title}}</view>
+        </view>
+        <view class="buy_interface_name">
+          <image src="/images/commodity/price.png" class="buy_interface_icon"></image>
+          <view class="buy_interface_price">价格：
+            <text class="buy_interface_price_name">￥{{commodity.price}}</text>
+          </view>
+        </view>
+        <view class="buy_interface_name">
+          <image src="/images/commodity/id.png" class="buy_interface_icon"></image>
+          <view class="buy_interface_name_word">订单号：{{order_id}}</view>
+        </view>
+        <view class="buy_interface_name">
+          <image src="/images/commodity/order.png" class="buy_interface_icon"></image>
+          <view class="buy_interface_order">
+            <view class="buy_interface_order_name">预约时间：</view>
+            <view class="buy_interface_order_time">
+              <picker mode="date" start="{{(today_year-1)+'-01-01'}}" end="{{(today_year+1)+'-12-31'}}" value="{{date}}" bindchange="getDate">{{date}}</picker>
+              <picker mode="time" start="00:00" end="24:00" value="{{time}}" bindchange="getTime">{{time}}</picker>
+            </view>
+          </view>
+        </view>
+        <view class="buy_interface_btns">
+          <view class="buy_interface_btn" bindtap="getOrderTime">预约</view>
+          <view class="buy_interface_btn cancel" bindtap="cancelOrderTime">暂不预约</view>
+        </view>
+      </view>
+    </image>
+  </view>
+  <!--/下单成功-->
+</view>
