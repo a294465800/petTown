@@ -147,15 +147,15 @@ Page({
       }
 
       wx.request({
-        url: app.globalData.host + 'order/comment',
+        url: app.globalData.host_v2 + 'order/comment',
         method: 'POST',
-        header: app.globalData.header,
         data: {
           orderID: that.data.order_id,
           content: that.data.comments,
           score_en: that.data.score.environment,
           score_at: that.data.score.service,
-          img: baseurl
+          img: baseurl,
+          token: app.globalData.token,
         },
         success: res => {
           if (200 == res.data.code) {

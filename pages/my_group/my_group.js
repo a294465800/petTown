@@ -48,7 +48,7 @@ Page({
   firstRequest() {
     const that = this
     wx.request({
-      url: app.globalData.host_v2 + 'my/groups',
+      url: app.globalData.host_v2 + 'my/groups?state=1',
       data: {
         token: app.globalData.token
       },

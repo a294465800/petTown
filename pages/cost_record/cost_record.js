@@ -57,7 +57,6 @@ Page({
     that.setData({
       star_count: arr
     })
-    that.orderRequestAPI(1, that.data.state)
   },
 
   onShow() {
@@ -65,6 +64,7 @@ Page({
     that.setData({
       userInfo: app.globalData.userInfo
     })
+    that.orderRequestAPI(1, that.data.state)
   },
 
   //订单请求

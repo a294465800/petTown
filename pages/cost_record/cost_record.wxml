@@ -18,7 +18,7 @@
             <block wx:if="{{orders[state].length > 0}}">
               <view class="been_comment" hover-class="push_class" hover-stay-time="150" wx:for="{{orders[state]}}" wx:key="id">
                 <view class="been_comment_content">
-                  <image src="{{item.product_img}}" class="been_comment_img" mode="aspectFill"></image>
+                  <image src="{{item.img}}" class="been_comment_img" mode="aspectFill"></image>
                   <view class="been_comment_word">
                     <view class="been_comment_title">{{item.product_name}}</view>
                     <view class="been_comment_shop">—{{item.store_name}}</view>
@@ -44,7 +44,7 @@
             <block wx:if="{{orders[state].length > 0}}">
               <view class="been_comment" hover-class="push_class" hover-stay-time="150" wx:for="{{orders[state]}}" wx:key="id">
                 <view class="been_comment_content">
-                  <image src="{{item.product_img}}" class="been_comment_img" mode="aspectFill"></image>
+                  <image src="{{item.img}}" class="been_comment_img" mode="aspectFill"></image>
                   <view class="been_comment_word">
                     <view class="been_comment_title">{{item.product_name}}</view>
                     <view class="been_comment_shop">—{{item.store_name}}</view>
@@ -72,7 +72,7 @@
             <block wx:if="{{orders[state].length > 0}}">
               <view class="been_comment" wx:for="{{orders[state]}}" wx:for-item="finish" wx:key="id" hover-class="push_class" hover-stay-time="150">
                 <view class="been_comment_content">
-                  <image src="{{finish.product_img}}" class="been_comment_img" mode="aspectFill"></image>
+                  <image src="{{finish.img}}" class="been_comment_img" mode="aspectFill"></image>
                   <view class="been_comment_word">
                     <view class="been_comment_title">{{finish.product_name}}</view>
                     <view class="been_comment_shop">—{{finish.store_name}}</view>

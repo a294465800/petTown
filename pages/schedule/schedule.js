@@ -24,32 +24,32 @@ Page({
   onLoad(options) {
     const that = this
     let order_id = options.id
-    // that.setData({
-    //   order_id: order_id
-    // })
-    // wx.request({
-    //   url: app.globalData.host + 'order',
-    //   header: app.globalData.header,
-    //   data: {
-    //     number: order_id
-    //   },
-    //   success: res => {
-    //     if (200 == res.data.code) {
-    //       that.setData({
-    //         order_info: res.data.data
-    //       })
-    //     }else {
-    //       wx.showModal({
-    //         title: '提示',
-    //         content: '没有该订单',
-    //         showCancel: false,
-    //         success: res => {
-    //           wx.navigateBack({})
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
+    that.setData({
+      order_id: order_id
+    })
+    wx.request({
+      url: app.globalData.host + 'order',
+      data: {
+        number: order_id,
+        token: app.globalData.token,
+      },
+      success: res => {
+        if (200 == res.data.code) {
+          that.setData({
+            order_info: res.data.data
+          })
+        }else {
+          wx.showModal({
+            title: '提示',
+            content: '没有该订单',
+            showCancel: false,
+            success: res => {
+              wx.navigateBack({})
+            }
+          })
+        }
+      }
+    })
   },
 
   //获取picker
@@ -84,11 +84,11 @@ Page({
       success: res => {
         if (res.confirm) {
           wx.request({
-            url: app.globalData.host + 'order/finish',
+            url: app.globalData.host_v2 + 'order/finish',
             method: 'POST',
-            header: app.globalData.header,
             data: {
-              number: that.data.order_id
+              number: that.data.order_id,
+              token: app.globalData.token,
             },
             success: res => {
               if (200 == res.data.code) {
@@ -125,12 +125,12 @@ Page({
     }
 
     wx.request({
-      url: app.globalData.host + 'schedule/add',
-      header: app.globalData.header,
+      url: app.globalData.host_v2 + 'schedule/add',
       method: 'POST',
       data: {
         number: that.data.order_id,
-        time: that.data.date + ' ' + that.data.time + ':00'
+        time: that.data.date + ' ' + that.data.time + ':00',
+          token: app.globalData.token,
       },
       success: res => {
         if (200 == res.data.code) {
