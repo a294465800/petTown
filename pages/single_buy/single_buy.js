@@ -28,7 +28,7 @@ Page({
     const that = this
     const id = options.id
     wx.request({
-      url: app.globalData.host + 'V1/prepay/' + id,
+      url: app.globalData.host_v1 + 'prepay/' + id,
       success: res => {
         if (200 == res.data.code) {
           that.setData({

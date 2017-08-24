@@ -33,7 +33,7 @@
   <!--产品说明-->
   <view class="commodity_description">
     <view class="commodity_description_logo">
-      <image src="/images/commodity/description.png" mode="aspectFit" class="commodity_icon"></image>
+      <image src="/images/shop/description.png" mode="aspectFit" class="commodity_icon"></image>
       <view class="commodity_description_title">产品说明</view>
     </view>
     <view class="commodity_notes_info">
@@ -45,7 +45,7 @@
   <!--购买须知-->
   <view class="commodity_notes">
     <view class="commodity_notes_logo">
-      <image src="/images/commodity/notes.png" mode="aspectFit" class="commodity_icon"></image>
+      <image src="/images/shop/notes.png" mode="aspectFit" class="commodity_icon"></image>
       <view class="commodity_notes_title">购买须知</view>
     </view>
     <view class="commodity_notes_info">
@@ -57,7 +57,7 @@
   <!--拼团说明-->
   <view class="commodity_description">
     <view class="commodity_description_logo">
-      <image src="/images/commodity/description.png" mode="aspectFit" class="commodity_icon"></image>
+      <image src="/images/shop/description.png" mode="aspectFit" class="commodity_icon"></image>
       <view class="commodity_description_title">拼团说明</view>
     </view>
     <view class="commodity_description_info">

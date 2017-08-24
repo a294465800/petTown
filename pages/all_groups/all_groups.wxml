@@ -1,0 +1,45 @@
+<!--all_groups.wxml-->
+<view class="container">
+  <!--拼团信息  -->
+  <view class="commodity_group_list">
+    <block wx:if="{{groups}}">
+      <view class="commodity_group_item" wx:for="{{groups}}" wx:key="id" wx:for-item="group">
+        <view class="commodity_group_info">
+          <view class="commodity_group_info_imgs">
+            <block wx:for="{{group_imgs}}" wx:for-index="group_img">
+              <block wx:if="{{group_img < limit}}">
+                <block wx:if="{{group.userImg[group_img]}}">
+                  <image src="{{group.userImg[group_img]}}" mode="aspectFill" class="commodity_group_info_img"></image>
+                </block>
+                <block wx:else>
+                  <image src="/images/commodity/query.png" mode="aspectFill" class="commodity_group_info_img"></image>
+                </block>
+              </block>
+            </block>
+          </view>
+        </view>
+        <block wx:if="{{group.limit}}">
+          <view class="commodity_group_info_time">还差{{group.limit}}人，剩余 {{left_time[index]}}</view>
+          <view class="btn">
+            <view class="commodity_group_btn" catchtap="joinGroup" data-id="{{group.id}}">立即参团</view>
+          </view>
+        </block>
+        <block wx:else>
+          <!-- <view class="commodity_group_info_time">已结束！</view> -->
+        <view class="btn">
+          <view class="commodity_group_btn disabled">已经结束</view>
+        </view>
+        </block>
+        <!-- <view class="commodity_group_info_time">还差{{group.limit}}人，剩余 {{left_time[index]}}</view> -->
+      </view>
+    </block>
+    <block wx:else>
+      <view class="index-tips">—— 暂时没有拼团信息 ——</view>
+    </block>
+  </view>
+
+  <block wx:if="{{close}}">
+    <view class="index-tips">—— 已加载全部拼团信息 ——</view>
+  </block>
+  <!--/拼团信息  -->
+</view>

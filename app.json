@@ -15,6 +15,7 @@
     "pages/single_buy/single_buy",
     "pages/group_buy/group_buy",
     "pages/all_comment/all_comment",
+    "pages/all_groups/all_groups",
     "pages/logs/logs"
   ],
   "window": {

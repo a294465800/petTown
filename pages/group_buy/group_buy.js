@@ -22,7 +22,7 @@ Page({
       app.getSetting()
     }
     wx.request({
-      url: app.globalData.host + 'V1/group/' + id,
+      url: app.globalData.host_v1 + 'group/' + id,
       header: app.globalData.header,
       success: res => {
         if (200 == res.data.code) {
@@ -156,7 +156,6 @@ Page({
 
       wx.request({
         url: app.globalData.host + 'order/make',
-        header: app.globalData.header,
         success: res => {
           if (200 == res.data.code) {
             let order_id = res.data.data
@@ -164,14 +163,14 @@ Page({
               order_id: order_id
             })
             wx.request({
-              url: app.globalData.host + 'order/pay',
-              header: app.globalData.header,
+              url: app.globalData.host_v2 + 'order/pay',
               method: 'POST',
               data: {
                 product_id: product_id,
                 group_id: group_id,
                 type: 2,
-                number: order_id
+                number: order_id,
+                token: app.globalData.token
               },
               success: res => {
                 wx.hideLoading()

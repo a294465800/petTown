@@ -3,6 +3,8 @@
 .container {
   background-color: #f5f5f9;
   padding-bottom: 200rpx;
+  min-height: 100%;
+  height: auto;
 }
 
 .commodity-item-price {

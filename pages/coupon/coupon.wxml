@@ -1,19 +1,66 @@
 <!--coupon.wxml-->
 <view class="container">
-  <block wx:if="{{coupon.length > 0}}">
-    <view class="coupon_item" wx:for="{{coupon}}" wx:key="id">
-      <view class="coupon_item_top">
-        <view class="coupon_item_top_price">￥<text class="coupon_item_top_price_num">{{item.price}}</text></view>
-        <view class="coupon_item_top_type">
-          <view class="coupon_item_top_type_name">{{item.name}}</view>
-          <view class="coupon_item_top_type_tip">{{item.tip}}</view>
-        </view>
-        <view class="coupon_item_top_circle"></view>
-      </view>
-      <view class="coupon_item_bottom">优惠券有效期：{{item.time}}</view>
-    </view>
-  </block>
-  <block wx:else>
-    <view class="coupons_bottom">——— 暂无优惠券 ———</view>
-  </block>
+
+  <!--优惠券导航  -->
+  <view class="shop-nav">
+    <view class="shop-nav-item {{current == index ? 'active': ''}}" wx:for="{{coupon_nav}}" wx:key="id" data-index="{{index}}" catchtap="shiftPage">{{item.name}}</view>
+    <view class="shop-nav-item-border" animation="{{animationNav}}"></view>
+  </view>
+  <!--/优惠券导航  -->
+
+  <!--内容  -->
+  <view class="swiper-wrap">
+    <swiper current="{{current}}" bindchange="nextPage">
+      <!--优惠券列表  -->
+      <swiper-item>
+        <scroll-view scroll-y class="swiper-scroll" bindscrolltolower="toBottomUse" data-state="{{coupons[1][0].state}}">
+          <block wx:if="{{coupons[1].length > 0}}">
+            <view class="coupon_item" wx:for="{{coupons[1]}}" wx:key="id" wx:for-item="coupon">
+              <view class="coupon_item_top">
+                <view class="coupon_item_top_price">￥<text class="coupon_item_top_price_num">{{coupon.price}}</text></view>
+                <view class="coupon_item_top_type">
+                  <view class="coupon_item_top_type_name">{{coupon.title}}</view>
+                  <view class="coupon_item_top_type_tip">满 {{coupon.limit}} 可用</view>
+                </view>
+                <view class="coupon_item_top_circle"></view>
+              </view>
+              <view class="coupon_item_bottom">优惠券有效期：{{coupon.start}} - {{coupon.end}}</view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="index-tips">—— 暂无优惠券 ——</view>
+          </block>
+          <view class="coupons_bottom" hidden="{{!close[1]}}">——— 已加载全部优惠券 ———</view>
+        </scroll-view>
+      </swiper-item>
+      <!--/优惠券列表  -->
+
+      <!--拼团成功  -->
+      <swiper-item>
+        <scroll-view scroll-y class="swiper-scroll" bindscrolltolower="toBottomUse" data-state="{{coupons[2][0].state}}">
+          <block wx:if="{{coupons[2].length > 0}}">
+            <view class="coupon_item" wx:for="{{coupons[2]}}" wx:key="id" wx:for-item="coupon">
+              <view class="coupon_item_top">
+                <view class="coupon_item_top_price">￥<text class="coupon_item_top_price_num">{{coupon.price}}</text></view>
+                <view class="coupon_item_top_type">
+                  <view class="coupon_item_top_type_name">{{coupon.title}}</view>
+                  <view class="coupon_item_top_type_tip">满 {{coupon.limit}} 可用</view>
+                </view>
+                <view class="coupon_item_top_circle"></view>
+              </view>
+              <view class="coupon_item_bottom">优惠券有效期：{{coupon.start}} - {{coupon.end}}</view>
+              <image src="/images/icon/lost.png" mode="aspectFill" class="coupon_item_lost"></image>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="index-tips">—— 暂无优惠券 ——</view>
+          </block>
+          <view class="coupons_bottom" hidden="{{!close[2]}}">——— 已加载全部优惠券 ———</view>
+        </scroll-view>
+      </swiper-item>
+      <!--/拼团成功  -->
+
+    </swiper>
+  </view>
+  <!--/内容  -->
 </view>
