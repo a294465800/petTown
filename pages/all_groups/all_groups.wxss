@@ -1,5 +1,11 @@
 /* all_groups.wxss */
 
+.container {
+  min-height: 100%;
+  height: auto;
+  padding-bottom: 80rpx;
+}
+
 .commodity_group_more_btn {
   text-align: right;
 }

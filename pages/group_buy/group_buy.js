@@ -32,13 +32,13 @@ Page({
             flag_time: true
           })
           that.getIntervalTime()
-        }else {
+        } else {
           wx.showModal({
             title: '提示',
             content: res.data.msg,
             showCancel: false,
             success: (res) => {
-              if(res.confirm){
+              if (res.confirm) {
                 wx.navigateBack()
               }
             }
@@ -160,7 +160,8 @@ Page({
           if (200 == res.data.code) {
             let order_id = res.data.data
             that.setData({
-              order_id: order_id
+              order_id: order_id,
+              token: app.globalData.token
             })
             wx.request({
               url: app.globalData.host_v2 + 'order/pay',
@@ -193,8 +194,15 @@ Page({
                     },
                     fail: fail => {
                       wx.request({
-                        url: app.globalData.host + 'V1/group/cancel/' + group_id,
-                        header: app.globalData.header
+                        url: app.globalData.host_v2 + 'group/cancel/' + group_id,
+                        data: {
+                          token: app.globalData.token
+                        },
+                        success: res => {
+                          wx.showToast({
+                            title: '已取消',
+                          })
+                        }
                       })
                     }
                   })

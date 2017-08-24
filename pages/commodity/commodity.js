@@ -198,7 +198,8 @@ Page({
           if (200 == res.data.code) {
             let order_id = res.data.data
             that.setData({
-              order_id: order_id
+              order_id: order_id,
+              token: app.globalData.token
             })
             wx.request({
               url: app.globalData.host_v2 + 'make/group',
@@ -237,6 +238,19 @@ Page({
                               complete: () => {
                                 wx.redirectTo({
                                   url: '/pages/commodity/commodity?commodity_id=' + that.data.commodity_id,
+                                })
+                              }
+                            })
+                          },
+                          fail: fail => {
+                            wx.request({
+                              url: app.globalData.host_v2 + 'group/delete/' + group_id,
+                              data: {
+                                token: app.globalData.token
+                              },
+                              success: res => {
+                                wx.showToast({
+                                  title: '已取消',
                                 })
                               }
                             })
