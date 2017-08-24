@@ -65,7 +65,7 @@
     <!--/目录  -->
 
     <!--提示  -->
-    <view class="index-tips">———— 附近商家 ————</view>
+    <view class="index-tips" hidden="{{!shops.length}}">———— 附近商家 ————</view>
     <!--/提示  -->
 
     <!--商家列表  -->
@@ -78,11 +78,11 @@
             <image src="{{index < shop.score? star_img.ok: star_img.no}}" mode="aspectFit" wx:for="{{star_count}}"></image>
           </view>
           <view class="index-shops-item-type">
-            <view wx:for="{{shop.type}}" wx:key="*this">{{item}}</view>
+            <view wx:for="{{shop.types}}" wx:key="*this">{{item}}</view>
           </view>
         </view>
         <view class="index-shops-item-distance">
-          <icon type="info" size="16" />{{shop.distance}}
+          <icon type="info" size="16" />{{shop.dist}}km
         </view>
       </view>
     </view>
