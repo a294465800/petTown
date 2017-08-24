@@ -1,0 +1,21 @@
+<!--commodity_cards_use.wxml-->
+<view class="container">
+  <view class="been_comment">
+    <view class="been_comment_content">
+      <image src="{{card_info.img}}" class="been_comment_img" mode="aspectFill"></image>
+      <view class="been_comment_word">
+        <view class="been_comment_title">{{card_info.product}}</view>
+        <view class="been_comment_shop">—{{card_info.store}}</view>
+      </view>
+    </view>
+    <view class="shop_item_price">
+      <view class="cards-price">￥<text class="shop_item_price_number">{{card_info.price}}</text><text class="shop_item_pre_price">原价：￥{{card_info.origin_price}}</text>
+      </view>
+      <view class="card-left">剩余{{card_info.times}}次</view>
+    </view>
+    <view class="order_time not_cost_id_title">订单号：{{card_info.order_id}}</view>
+    <view class="order_time not_cost_id_title">下单时间：{{card_info.createtime}}</view>
+    <view class="order_time not_cost_id_title new">最新使用：{{card_info.updatetime}}</view>
+    <view class="been_comment_btn not_cost_btn" catchtap="cardUse" data-id="{{card_info.id}}">使用一次</view>
+  </view>
+</view>

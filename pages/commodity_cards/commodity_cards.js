@@ -44,19 +44,23 @@ Page({
       title: '加载中',
     })
     wx.request({
-      url: app.globalData.host + 'V1/my/card',
-      header: app.globalData.header,
+      url: app.globalData.host_v2 + 'my/cards?state=1',
+      data: {
+        token: app.globalData.token
+      },
       success: res => {
+        wx.hideLoading()
         if (200 == res.data.code) {
-          wx.hideLoading()
           that.saveCards([], res.data.data, 1, 1)
         }
       }
     })
 
     wx.request({
-      url: app.globalData.host + 'V1/my/card?state=2',
-      header: app.globalData.header,
+      url: app.globalData.host_v2 + 'my/cards?state=2',
+      data: {
+        token: app.globalData.token
+      },
       success: res => {
         if (200 == res.data.code) {
           that.saveCards([], res.data.data, 1, 2)
@@ -137,8 +141,10 @@ Page({
       title: '加载中',
     })
     wx.request({
-      url: app.globalData.host + 'V1/my/card?state=' + state + '&page=' + (page + 1),
-      header: app.globalData.header,
+      url: app.globalData.host_v2 + 'my/cards?state=' + state + '&page=' + (page + 1),
+      data: {
+        token: app.globalData.token
+      },
       success: res => {
         if (200 == res.data.code) {
           let data = res.data.data

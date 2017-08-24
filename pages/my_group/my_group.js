@@ -48,8 +48,10 @@ Page({
   firstRequest() {
     const that = this
     wx.request({
-      url: app.globalData.host + 'V1/my/groups',
-      header: app.globalData.header,
+      url: app.globalData.host_v2 + 'my/groups',
+      data: {
+        token: app.globalData.token
+      },
       success: res => {
         if (200 == res.data.code) {
           that.saveMyGroups([], res.data.data, 1, 1)
@@ -94,8 +96,10 @@ Page({
     })
     let page = that.data.page[state] + 1
     wx.request({
-      url: app.globalData.host + 'V1/my/groups?state=' + state + '&page=' + page,
-      header: app.globalData.header,
+      url: app.globalData.host_v2 + 'my/groups?state=' + state + '&page=' + page,
+      data: {
+        token: app.globalData.token
+      },
       success: res => {
         if (200 == res.data.code) {
           let data = res.data.data
@@ -134,8 +138,10 @@ Page({
     const that = this
 
     wx.request({
-      url: app.globalData.host + 'V1/my/groups?state=2',
-      header: app.globalData.header,
+      url: app.globalData.host_v2 + 'my/groups?state=2',
+      data: {
+        token: app.globalData.token
+      },
       success: res => {
         if (200 == res.data.code) {
           that.saveMyGroups([], res.data.data, 1, 2)

@@ -100,9 +100,11 @@ Page({
                     wx.showToast({
                       title: '下单成功',
                     })
-                    that.setData({
-                      buy: true
-                    })
+                    if (that.data.commodity.type == 1) {
+                      that.setData({
+                        buy: true
+                      })
+                    }
                   }
                 })
               }

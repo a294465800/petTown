@@ -18,6 +18,7 @@
     "pages/all_groups/all_groups",
     "pages/my_group/my_group",
     "pages/commodity_cards/commodity_cards",
+    "pages/commodity_cards_use/commodity_cards_use",
     "pages/logs/logs"
   ],
   "window": {
