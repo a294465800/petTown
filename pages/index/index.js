@@ -117,7 +117,7 @@ Page({
     let arr = []
     //评论星数数量
     arr.length = 5
-    app.nowLogin() 
+    app.nowLogin()
     that.firstRequest(res => {
       that.setData({
         star_count: arr,
@@ -147,6 +147,17 @@ Page({
           }
         })
       },
+    })
+
+    wx.request({
+      url: app.globalData.host + 'adverts',
+      success: res => {
+        if (200 == res.data.code) {
+          that.setData({
+            imgUrls: res.data.data
+          })
+        }
+      }
     })
 
     // wx.request({
@@ -226,6 +237,13 @@ Page({
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/shop/shop?id=' + id,
+    })
+  },
+
+  //广告跳转
+  goToAdContent(e) {
+    wx.navigateTo({
+      url: '/pages/ad_page/ad_page?link=' + e.currentTarget.dataset.content,
     })
   }
 })

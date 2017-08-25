@@ -19,6 +19,7 @@
     "pages/my_group/my_group",
     "pages/commodity_cards/commodity_cards",
     "pages/commodity_cards_use/commodity_cards_use",
+    "pages/ad_page/ad_page",
     "pages/logs/logs"
   ],
   "window": {

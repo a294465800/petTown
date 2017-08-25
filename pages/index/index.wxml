@@ -4,9 +4,9 @@
 
     <!--广告-->
     <swiper class="ad-header" indicator-dots autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{imgUrls}}">
+      <block wx:for="{{imgUrls}}" wx:key="id" wx:for-item="img">
         <swiper-item>
-          <image src="{{item}}" class="ad-header-img" mode="aspectFill" />
+          <image src="{{img.cover}}" class="ad-header-img" mode="aspectFill" catchtap="goToAdContent" data-content="{{img.content}}" />
         </swiper-item>
       </block>
     </swiper>
