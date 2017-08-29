@@ -36,7 +36,10 @@ Page({
     shops: null,
     page: 1,
     location_flag: false,
+    type_id: '',
     location: null,
+    store_types: [],
+    current_type: null,
 
     //模拟数据
 
@@ -74,7 +77,7 @@ Page({
     that.judgeLocationAPI(res => {
       that.setData({
         star_count: arr,
-        shops: [...res, ...that.data.new_shops]
+        shops: res
       })
     })
   },
@@ -165,16 +168,34 @@ Page({
         }
       }
     })
+
+    //请求分类
+    wx.request({
+      url: app.globalData.host_v2 + 'store/types',
+      success: res => {
+        if (200 == res.data.code) {
+          that.setData({
+            store_types: res.data.data
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
+    })
   },
 
   //请求商店
-  getStore(page, cb) {
+  getStore(id, page, cb) {
     const that = this
     wx.request({
       url: app.globalData.host_v2 + 'stores',
       data: {
         location: that.data.location || '',
         page: page,
+        type: id || ''
       },
       success: res => {
         if (200 == res.data.code) {
@@ -249,7 +270,7 @@ Page({
     that.setData({
       flag: true
     })
-    that.getStore(that.data.page + 1, (data) => {
+    that.getStore(that.data.type_id, that.data.page + 1, (data) => {
       if (data.length) {
         that.setData({
           shops: [...that.data.shops, ...data],
@@ -273,10 +294,45 @@ Page({
     that.judgeLocationAPI(res => {
       that.setData({
         close: false,
-        shops: [...res, ...that.data.new_shops]
+        shops: res
       })
       wx.stopPullDownRefresh()
     })
+  },
+
+  //店铺分类搜索
+  storeType(e) {
+    const that = this
+    const id = e.currentTarget.dataset.id
+    const index = e.currentTarget.dataset.index
+    wx.showLoading({
+      title: '加载中',
+    })
+    if (index === that.data.current_type) {
+      that.setData({
+        current_type: null,
+        type_id: '',
+      })
+      that.getStore('', 1, data => {
+        wx.hideLoading()
+        that.setData({
+          close: false,
+          shops: data,
+        })
+      })
+    } else {
+      that.setData({
+        current_type: index,
+        type_id: id,
+      })
+      that.getStore(id, 1, data => {
+        wx.hideLoading()
+        that.setData({
+          close: false,
+          shops: data,
+        })
+      })
+    }
   },
 
 

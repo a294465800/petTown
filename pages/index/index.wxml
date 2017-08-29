@@ -21,45 +21,9 @@
 
     <!--目录  -->
     <scroll-view scroll-x class="index-category-scroll">
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡交易</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
-      </view>
-      <view class="index-category-item">
-        <icon type="success" size="50" />
-        <view>洗澡</view>
+      <view class="index-category-item {{current_type == index? 'active' : ''}}" wx:for="{{store_types}}" wx:key="id" wx:for-item="type" catchtap="storeType" data-id="{{type.id}}" data-index="{{index}}">
+        <image src="{{type.url}}" mode="aspectFit" class="index-category-item-img"></image>
+        <view>{{type.name}}</view>
       </view>
     </scroll-view>
     <!--/目录  -->
@@ -67,7 +31,10 @@
     <!--提示  -->
     <view class="index-tips" hidden="{{!location_flag}}">———— 附近商家 ————</view>
     <view class="location" hidden="{{location_flag}}">
-      <view class="location_btn" catchtap="getLocation">定位</view>
+      <view class="location_btn" catchtap="getLocation">
+        <image src="/images/icon/location.png" mode="aspectFit" class="location_icon"></image>
+        <view class="">定位</view>
+      </view>
       <text class="index-tips">———— 商家 ————</text>
     </view>
     <!--/提示  -->
@@ -85,12 +52,14 @@
             <view wx:for="{{shop.types}}" wx:key="*this">{{item}}</view>
           </view>
         </view>
-        <view class="index-shops-item-distance">
-          <icon type="info" size="16" />{{shop.dist}}km
+        <view class="index-shops-item-distance" wx:if="{{shop.dist}}">
+          <image src="/images/icon/location.png" class="location_icon" mode="aspectFit"></image>
+          <view>{{shop.dist}}km</view>
         </view>
+        <view class="index-shops-item-distance small" wx:else>暂无距离</view>
       </view>
     </view>
-    <view class="index-tips" wx:else>———— 加载中 ————</view>
+    <view class="index-tips" wx:else>暂无店铺</view>
     <!--/商家列表  -->
 
     <!--底部提示  -->

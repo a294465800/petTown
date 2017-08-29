@@ -59,6 +59,13 @@
   display: inline-block;
 }
 
+.index-category-item-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #eee;
+}
+
 /*商家列表  */
 
 .index-shops-list {
@@ -90,10 +97,11 @@
   width: 150rpx;
   color: #ff963d;
   font-size: 18px;
+  display: flex;
 }
 
-.index-shops-item-distance icon {
-  margin-right: 10rpx;
+.small {
+  font-size: 14px;
 }
 
 .index-shops-item-name {
@@ -125,6 +133,8 @@
   font-size: 13px;
 }
 
+
+/*新增  */
 .location {
   margin: 30rpx 0;
   text-align: center;
@@ -136,4 +146,16 @@
   top: 0;
   left: 20rpx;
   font-size: 13px;
+  display: flex;
+  color: #ff963d;
+}
+
+.location_icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10rpx;
+}
+
+.active {
+  color: #ff963d;
 }
