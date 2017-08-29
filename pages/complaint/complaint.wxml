@@ -1,0 +1,16 @@
+<!--complaint.wxml-->
+<view class="container">
+  <!--反馈内容-->
+  <textarea auto-focus class="comment_inut" placeholder="请填写反馈内容" maxlength="200" bindinput="getComplaint" />
+  <view class="left_count">你还可以输入 {{left}} / 200</view>
+  <!--/反馈内容-->
+
+  <view class="form_part">
+    <view class="form_title">联系方式</view>
+    <input placeholder="您的手机号码" placeholder-class="tel_input" type="number" bindinput="numberInput" />
+  </view>
+
+  <!--提交-->
+  <view class="comment_submit" bindtap="complaintPost">提交</view>
+  <!--/提交-->
+</view>

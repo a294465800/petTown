@@ -79,5 +79,12 @@ Page({
     wx.navigateTo({
       url: '/pages/points/points',
     })
+  },
+
+  //反馈跳转
+  goToComplaint() {
+    wx.navigateTo({
+      url: '/pages/complaint/complaint',
+    })
   }
 })

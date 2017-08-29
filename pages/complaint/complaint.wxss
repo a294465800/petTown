@@ -1,0 +1,63 @@
+/* complaint.wxss */
+
+.container {
+  padding: 30rpx;
+  min-height: 100%;
+}
+
+.comment_inut {
+  height: 400rpx;
+  box-sizing: border-box;
+  width: 100%;
+  border: 2rpx solid #ccc;
+  border-radius: 10rpx;
+  padding: 20rpx 30rpx;
+  font-size: 16px;
+}
+
+.form_part {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 80rpx;
+  margin-top: 10rpx;
+}
+
+.form_title {
+  font-size: 14px;
+  min-width: 150rpx;
+}
+
+.form_part input {
+  padding-left: 20rpx;
+  flex: 1;
+  border-bottom: 2rpx solid #eee;
+}
+
+.form_part button {
+  font-size: 14px;
+}
+
+.tel_input {
+  font: normal 14px "Microsoft YaHei";
+}
+
+.left_count {
+  text-align: right;
+  color: #ff963d;
+  margin-top: 10rpx;
+}
+
+/*提交*/
+
+.comment_submit {
+  margin: 60rpx auto 0;
+  color: #fff;
+  background-color: #ff963d;
+  padding: 20rpx 0;
+  border-radius: 50rpx;
+  box-shadow: 6rpx 6rpx 4rpx #ccc;
+  text-align: center;
+  max-width: 240rpx;
+}

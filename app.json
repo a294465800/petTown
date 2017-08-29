@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/complaint/complaint",
     "pages/commodity/commodity",
     "pages/shop/shop",
     "pages/search_input/search_input",
