@@ -3,6 +3,7 @@
 .container {
   padding-bottom: 150rpx;
   height: auto;
+  min-height: 100%;
 }
 
 /*广告  */
@@ -121,5 +122,18 @@
   border-radius: 50rpx;
   margin: 0 10rpx 6rpx;
   color: #fff;
+  font-size: 13px;
+}
+
+.location {
+  margin: 30rpx 0;
+  text-align: center;
+  position: relative;
+}
+
+.location_btn {
+  position: absolute;
+  top: 0;
+  left: 20rpx;
   font-size: 13px;
 }

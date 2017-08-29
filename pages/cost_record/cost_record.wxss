@@ -162,3 +162,8 @@
 .not_cost_btn {
   background-color: #ff6464;
 }
+
+.tips {
+  padding-top: 50rpx;
+  color: #333;
+}

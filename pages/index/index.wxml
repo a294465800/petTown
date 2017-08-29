@@ -65,11 +65,15 @@
     <!--/目录  -->
 
     <!--提示  -->
-    <view class="index-tips" hidden="{{!shops.length}}">———— 附近商家 ————</view>
+    <view class="index-tips" hidden="{{!location_flag}}">———— 附近商家 ————</view>
+    <view class="location" hidden="{{location_flag}}">
+      <view class="location_btn" catchtap="getLocation">定位</view>
+      <text class="index-tips">———— 商家 ————</text>
+    </view>
     <!--/提示  -->
 
     <!--商家列表  -->
-    <view class="index-shops-list">
+    <view class="index-shops-list" wx:if="{{shops.length}}">
       <view class="index-shops-item" hover-class="push_class" wx:for="{{shops}}" wx:key="id" wx:for-item="shop" data-id="{{shop.id}}" catchtap="goToShop">
         <image src="{{shop.cover}}" class="index-shops-item-img" mode="aspectFill"></image>
         <view class="index-shops-item-content">
@@ -86,11 +90,11 @@
         </view>
       </view>
     </view>
+    <view class="index-tips" wx:else>———— 加载中 ————</view>
     <!--/商家列表  -->
 
     <!--底部提示  -->
-    <view class="index-tips" hidden="{{!loading_tips}}">———— 加载中 ————</view>
-    <view class="index-tips" hidden="{{loading_tips}}">———— 已加载附近全部商家 ————</view>
+    <view class="index-tips" hidden="{{!close}}">———— 已加载附近全部商家 ————</view>
     <!--/底部提示  -->
   </view>
 </block>

@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "小主帮"
+  "navigationBarTitleText": "小主帮",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#eee"
 }

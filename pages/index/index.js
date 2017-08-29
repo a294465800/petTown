@@ -29,63 +29,16 @@ Page({
     },
 
     //加载提示控制
-    loading_tips: true,
+    close: false,
+    flag: false,
 
     //接口数据
     shops: null,
+    page: 1,
+    location_flag: false,
+    location: null,
 
     //模拟数据
-    // shops: [
-    //   {
-    //     id: 0,
-    //     name: '君悦宠物店',
-    //     score: 2,
-    //     type: ['医疗', '美容', '活体'],
-    //     distance: '2.5km',
-    //   },
-    //   {
-    //     id: 1,
-    //     name: '肥猪宠物店啊啊啊啊啊啊啊',
-    //     score: 1,
-    //     type: ['医疗', '美容', '活体'],
-    //     distance: '2.5km',
-    //   },
-    //   {
-    //     id: 2,
-    //     name: '宠物店',
-    //     score: 5,
-    //     type: ['洗澡', '活体'],
-    //     distance: '2.5km',
-    //   },
-    //   {
-    //     id: 3,
-    //     name: '一号',
-    //     score: 3,
-    //     type: ['医疗', '美容', '活体', '洗澡', '体检', '喂食'],
-    //     distance: '2.5km',
-    //   },
-    //   {
-    //     id: 4,
-    //     name: '三号',
-    //     score: 7,
-    //     type: ['医疗', '美容', '活体'],
-    //     distance: '2.5km',
-    //   },
-    //   {
-    //     id: 5,
-    //     name: '爱之旅宠物店',
-    //     score: 3,
-    //     type: ['医疗', '美容'],
-    //     distance: '2.5km',
-    //   },
-    //   {
-    //     id: 6,
-    //     name: '飞跃宠物店',
-    //     score: 4,
-    //     type: ['医疗', '美容', '活体'],
-    //     distance: '2.5km',
-    //   },
-    // ],
 
     new_shops: [
       {
@@ -118,35 +71,88 @@ Page({
     //评论星数数量
     arr.length = 5
     app.nowLogin()
-    that.firstRequest(res => {
+    that.judgeLocationAPI(res => {
       that.setData({
         star_count: arr,
-        shops: res
+        shops: [...res, ...that.data.new_shops]
       })
     })
   },
 
-  firstRequest(cb) {
+  //获取定位
+  getLocation(cb) {
     const that = this
     wx.getLocation({
-      success: location => {
-        wx.request({
-          url: app.globalData.host_v2 + 'stores',
-          data: {
-            location: location.latitude + ',' + location.longitude
-          },
-          success: res => {
-            if (200 == res.data.code) {
-              typeof cb == "function" && cb(res.data.data)
-            } else {
-              wx.showModal({
-                title: '提示',
-                content: res.data.msg,
-              })
+      success: res => {
+        console.log('success')
+        const tmp = res.latitude + ',' + res.longitude
+        if (typeof cb === 'function') {
+          cb(tmp)
+        } else {
+          console.log('cb')
+          that.firstRequest(tmp, data => {
+            that.setData({
+              shops: [...data, ...that.data.new_shops],
+              close: false,
+              location_flag: true,
+            })
+          })
+        }
+      },
+      fail: error => {
+        console.log('error')
+        wx.openSetting({
+          success: rs => {
+            if (rs.authSetting['scope.userLocation']) {
+              that.getLocation(cb)
             }
           }
         })
+      }
+    })
+  },
+
+  //判定定位权限
+  judgeLocationAPI(cb) {
+    const that = this
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userLocation'] === true) {
+          that.getLocation(location => {
+            that.setData({
+              location: location,
+              location_flag: true,
+            })
+            that.firstRequest(location, cb)
+          })
+        } else {
+          that.setData({
+            location_flag: false
+          })
+          that.firstRequest('', cb)
+        }
+      }
+    })
+  },
+
+  //初次请求封装
+  firstRequest(location, cb) {
+    const that = this
+    wx.request({
+      url: app.globalData.host_v2 + 'stores',
+      data: {
+        location: location
       },
+      success: res => {
+        if (200 == res.data.code) {
+          typeof cb == "function" && cb(res.data.data)
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
     })
 
     wx.request({
@@ -159,20 +165,28 @@ Page({
         }
       }
     })
+  },
 
-    // wx.request({
-    //   url: app.globalData.host_v2 + 'stores',
-    //   success: res => {
-    //     if (200 == res.data.code) {
-    //       typeof cb == "function" && cb(res.data.data)
-    //     } else {
-    //       wx.showModal({
-    //         title: '提示',
-    //         content: res.data.msg,
-    //       })
-    //     }
-    //   }
-    // })
+  //请求商店
+  getStore(page, cb) {
+    const that = this
+    wx.request({
+      url: app.globalData.host_v2 + 'stores',
+      data: {
+        location: that.data.location || '',
+        page: page,
+      },
+      success: res => {
+        if (200 == res.data.code) {
+          typeof cb == "function" && cb(res.data.data)
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.msg,
+          })
+        }
+      }
+    })
   },
 
   //监听触摸开始位置
@@ -225,12 +239,46 @@ Page({
   //触底刷新
   onReachBottom() {
     const that = this
-    setTimeout(() => {
-      that.setData({
-        shops: [...that.data.shops, ...that.data.new_shops]
-      })
-    }, 500)
+    //主动关闭触底或者防止二次触发
+    if (that.data.close || that.data.flag) {
+      return false
+    }
+    wx.showLoading({
+      title: '加载中',
+    })
+    that.setData({
+      flag: true
+    })
+    that.getStore(that.data.page + 1, (data) => {
+      if (data.length) {
+        that.setData({
+          shops: [...that.data.shops, ...data],
+          page: that.data.page + 1,
+          flag: false
+        })
+      } else {
+        that.setData({
+          close: true,
+          page: that.data.page + 1,
+          flag: false
+        })
+      }
+      wx.hideLoading()
+    })
   },
+
+  //下拉刷新
+  onPullDownRefresh() {
+    const that = this
+    that.judgeLocationAPI(res => {
+      that.setData({
+        close: false,
+        shops: [...res, ...that.data.new_shops]
+      })
+      wx.stopPullDownRefresh()
+    })
+  },
+
 
   //具体店铺跳转
   goToShop(e) {

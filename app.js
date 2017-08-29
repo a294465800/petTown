@@ -3,8 +3,6 @@ App({
   onLaunch() {
   },
   onShow() {
-    const that = this
-    that.getLocation()
   },
 
   globalData: {
@@ -226,15 +224,6 @@ App({
       }
     })
   },
-
-  //测试获取当前位置
-  getLocation(){
-    wx.getLocation({
-      success: function(res) {
-        console.log(res)
-      },
-    })
-  }
 
   //登录验证
   // checkLogin(cb) {
