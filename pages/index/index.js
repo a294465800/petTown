@@ -87,7 +87,6 @@ Page({
     const that = this
     wx.getLocation({
       success: res => {
-        console.log('success')
         const tmp = res.latitude + ',' + res.longitude
         if (typeof cb === 'function') {
           cb(tmp)
@@ -103,7 +102,6 @@ Page({
         }
       },
       fail: error => {
-        console.log('error')
         wx.openSetting({
           success: rs => {
             if (rs.authSetting['scope.userLocation']) {
@@ -245,7 +243,7 @@ Page({
   //搜索
   searchInput() {
     wx.navigateTo({
-      url: '/pages/search_input/search_input',
+      url: '/pages/search_input/search_input?location=' + this.data.location,
     })
   },
 

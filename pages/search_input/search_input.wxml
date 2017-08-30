@@ -3,7 +3,32 @@
   <view class="search-input-wrap">
     <view class="search-input">
       <icon type="search" size="18" />
-      <input placeholder-class="input_p" type="text" placeholder="搜索商家" auto-focus />
+      <input placeholder-class="input_p" bindinput="searchAuto" bindconfirm="search" confirm-type="search" type="text" placeholder="搜索商家" auto-focus />
     </view>
   </view>
+
+  <!--商家列表  -->
+  <view class="index-shops-list" wx:if="{{shops.length}}">
+    <view class="index-shops-item" hover-class="push_class" wx:for="{{shops}}" wx:key="id" wx:for-item="shop" data-id="{{shop.id}}" catchtap="goToShop">
+      <image src="{{shop.cover}}" class="index-shops-item-img" mode="aspectFill"></image>
+      <view class="index-shops-item-content">
+        <view class="index-shops-item-name">{{shop.name}}</view>
+        <view class="idnex-shops-item-score">
+          <image src="{{index < shop.score? star_img.ok: star_img.no}}" mode="aspectFit" wx:for="{{star_count}}"></image>
+        </view>
+        <view class="index-shops-item-type">
+          <view wx:for="{{shop.types}}" wx:key="*this">{{item}}</view>
+        </view>
+      </view>
+      <view class="index-shops-item-distance" wx:if="{{shop.dist}}">
+        <image src="/images/icon/location.png" class="location_icon" mode="aspectFit"></image>
+        <view>{{shop.dist}}km</view>
+      </view>
+      <view class="index-shops-item-distance small" wx:else>暂无距离</view>
+    </view>
+  </view>
+  <view class="index-tips" wx:else>没有结果</view>
+  <!--/商家列表  -->
+
+  <view class="index-tips" hidden="{{!close}}">已加载全部内容</view>
 </view>

@@ -1,5 +1,10 @@
 /* search_input.wxss */
 
+.container {
+  height: auto;
+  min-height: 100%;
+}
+
 /*搜索框  */
 .search-input-wrap {
   width: 100%;
@@ -26,4 +31,94 @@
 .search-input input {
   flex: 1;
   font-size: 16px;
+}
+
+/*店铺列表  */
+
+.index-shops-list {
+  background-color: #fff;
+}
+
+.index-shops-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  border-top: 2rpx solid #eee;
+}
+
+.index-shops-item-img {
+  width: 140rpx;
+  height: 140rpx;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.index-shops-item-content {
+  flex: 1;
+  padding-left: 20rpx;
+}
+
+.index-shops-item-distance {
+  width: 150rpx;
+  color: #ff963d;
+  font-size: 18px;
+  display: flex;
+}
+
+.small {
+  font-size: 14px;
+}
+
+.index-shops-item-name {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 340rpx;
+}
+
+.idnex-shops-item-score {
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.idnex-shops-item-score image {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0 2rpx;
+}
+
+.index-shops-item-type view {
+  display: inline-block;
+  background-color: goldenrod;
+  padding: 4rpx 10rpx;
+  border-radius: 50rpx;
+  margin: 0 10rpx 6rpx;
+  color: #fff;
+  font-size: 13px;
+}
+
+
+/*新增  */
+.location {
+  margin: 30rpx 0;
+  text-align: center;
+  position: relative;
+}
+
+.location_btn {
+  position: absolute;
+  top: 0;
+  left: 20rpx;
+  font-size: 13px;
+  display: flex;
+  color: #ff963d;
+}
+
+.location_icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10rpx;
 }
